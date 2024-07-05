@@ -26,6 +26,6 @@ CREATE TABLE Usuario (
 );
 
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON empresa_tecnologia.* TO 'admin'@'localhost';
+GRANT ALL PRIVILEGES ON grama.* TO 'admin'@'localhost';
 FLUSH PRIVILEGES;
 
