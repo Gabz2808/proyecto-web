@@ -7,17 +7,18 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 </head>
                 <body>
-                    <header th:replace="~{layout/plantilla :: header}"/>
+                <section th:replace="~{categoria/fragmentos :: iniciarSesion}"/>
+
+                <header th:replace="~{layout/plantilla :: header}"/>
+
+                <aside th:replace="~{layout/plantilla :: vendido}"/>
+                <div th:replace="~{layout/plantilla :: compras}"/>
+                <div th:replace="~{layout/plantilla :: busqueda}"/>
 
 
-                    <section th:replace="~{categoria/fragmentos :: iniciarSesion}"/>
-                    <section th:replace="~{categoria/fragmentos :: ingresarUsuario}"/>
-                    <section th:replace="~{categoria/fragmentos :: botonesAgregar}"/>
-                    
-                    <section th:replace="~{categoria/fragmentos :: listadoCategorias}"/>
 
 
-                    
+
                     <footer th:replace="~{layout/plantilla :: footer}"/>
                 </body>
                 </html>
