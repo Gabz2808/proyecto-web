@@ -15,29 +15,30 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title text-center mb-4">Sign In</h5>
-                    <form action="/login" method="post" th:action="@{/login}" class="needs-validation" novalidate>
+                    <h5 class="card-title text-center mb-4">Iniciar sesión</h5>
+                    <form action="#" th:action="@{/login}" method="post" class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <label for="inputEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="inputEmail" name="username" placeholder="Enter your email" required>
+                            <label for="inputEmail" class="form-label">Dirección de correo electrónico</label>
+                            <input type="email" class="form-control" id="inputEmail" name="correo" placeholder="Ingresa tu correo electrónico" required>
                             <div class="invalid-feedback">
-                                Please enter a valid email.
+                                Por favor ingresa un correo válido.
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+                            <label for="inputPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword" name="contrasena" placeholder="Contraseña" required>
                             <div class="invalid-feedback">
-                                Please enter your password.
+                                Por favor ingresa tu contraseña.
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <footer th:replace="~{layout/plantilla :: footer}"/>
 
 

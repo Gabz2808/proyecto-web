@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.proyecto.dao.UsuarioDao;
 import com.proyecto.domain.Usuario;
 import com.proyecto.service.UsuarioService;
+
 import java.util.List;
 
 @Service
@@ -15,10 +16,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Usuario> getUsuarios( ) {
-        var lista = usuarioDao.findAll();
-
-        return lista;
+    public List<Usuario> getUsuarios() {
+        return usuarioDao.findAll();
     }
 
     @Override
@@ -38,4 +37,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void delete(Usuario usuario) {
         usuarioDao.delete(usuario);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Usuario findByEmailAndPassword(String email, String contrasena) {
+        return usuarioDao.findByEmailAndContrasena(email, contrasena);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Usuario findByEmail(String email) {
+        return usuarioDao.findByEmail(email);
+    }
+
 }

@@ -12,4 +12,9 @@ public interface UsuarioService {
     public void save(Usuario usuario);
 
     public void delete(Usuario usuario);
+
+    Usuario findByEmailAndPassword(String email, String contrasena);
+
+    Usuario findByEmail(String email);
+
 }

@@ -8,19 +8,43 @@
 </head>
 <body>
 
+<style>
+.error-box {
+background-color: #fff;
+padding: 20px;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+text-align: center;
+width: 300px;
+}
+.error-message {
+color: #ff0000;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+</style>
+
 <header th:replace="~{layout/plantilla :: header}"/>
 
-<div class="container">
+
+    <div th:if="${errorVisible}" class="alert alert-danger" role="alert">
+        Ocurrió un error al procesar su solicitud.
+    </div>
+
+
+<div class="container mb-5">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center mb-4">Registrarse</h5>
-                    <form action="/register" method="post" th:action="@{/register}" class="needs-validation" novalidate>
+                    <form action="#" th:action="@{/register}" method="post" class="needs-validation" novalidate>
 
                         <div class="mb-3">
                             <label for="inputName" class="form-label">Nombre completo</label>
-                            <input type="text" class="form-control" id="inputName" name="name" placeholder="Nombre completo" required>
+                            <input type="text" class="form-control" id="inputName" name="nombreCompleto" placeholder="Nombre completo" required>
                             <div class="invalid-feedback">
                                 Por favor ingresa tu nombre completo.
                             </div>
@@ -28,7 +52,7 @@
 
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" name="username" placeholder="Ingrese su email" required>
+                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Ingrese su email" required>
                             <div class="invalid-feedback">
                                 Por favor ingresa un correo válido.
                             </div>
@@ -36,7 +60,7 @@
 
                         <div class="mb-3">
                             <label for="inputPassword" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Contraseña" required>
+                            <input type="password" class="form-control" id="inputPassword" name="contrasena" placeholder="Contraseña" required>
                             <div class="invalid-feedback">
                                 Por favor ingresa tu contraseña.
                             </div>
@@ -65,6 +89,7 @@
         </div>
     </div>
 </div>
+
 
 <footer th:replace="~{layout/plantilla :: footer}"/>
 

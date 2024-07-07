@@ -210,13 +210,29 @@
         <a href="#" class="nav-link">[[#{aplicacion.preguntas}]]</a>
         <a href="#" class="nav-link">[[#{aplicacion.nosotros}]]</a>
     </nav>
-    <div>
+    <div th:if="${isLoggedIn}">
+        <!-- Contenido para usuario autenticado -->
+        <button type="button" class="btn btn-outline-primary me-2">
+            <i></i> [[#{usuario.perfil}]]
+        </button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='/logout'">
+            <i></i> [[#{login.logout}]]
+        </button>
+
+    </div>
+
+
+    <div th:unless="${isLoggedIn}">
         <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href='/login'">
             <i></i> [[#{login.login}]]
         </button>
         <button type="button" class="btn btn-primary" onclick="window.location.href='/register'">
             <i></i> [[#{usuario.agregar}]]
         </button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='/perfil'">
+        <i class="fas fa-user"></i>
+        </button>
+
     </div>
 </header>
 
