@@ -3,11 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
     <head th:replace="~{layout/plantilla :: head}">
-        <title>[[#{aplicacion.titulo}]]</title>
+        <title>fragmentos</title>
     </head>
     <body>
-
-        <!-- 1 Fragmento del boton para agregar, llama una ventana modal-->
+        <!-- Fragmento del boton para agregar, llama una ventana modal-->
         <section th:fragment="botonesAgregar" class="py-3 mb-3">
             <div class="container">
                 <div class="row">
@@ -23,12 +22,11 @@
                 </div>
             </div>
         </section>
-
-        <!-- 2 Listado de productos-->
-        <section th:fragment="listadoProductos" id="productos">
+        <!-- Listado de productos-->
+        <section th:fragment="listado" id="productos">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-12">
                         <div class="card shadow">
                             <div class="card-header ">
                                 <h4>[[#{producto.listado}]]</h4>
@@ -37,7 +35,6 @@
                                 <table class="table table-striped table-hover">
                                     <thead class="table-dark">
                                         <tr><th>#</th>
-                                            <th>[[#{producto.categoria}]]</th>
                                             <th>[[#{producto.nombre}]]</th>
                                             <th>[[#{producto.descripcion}]]</th>
                                             <th>[[#{producto.precio}]]</th>
@@ -46,25 +43,24 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="producto, contador : ${productos}">
-                                            <td>[[#{producto.id}]]</td>
-                                            <td>[[#{producto.categoria}]]</td>
-                                            <td>[[#{producto.nombre}]]</td>
-                                            <td>[[#{producto.descripcion}]]</td>
-                                            <td>[[#{producto.precio}]]</td>
-                                            <td>[[#{producto.stock}]]</td>      
+                                            <td>[[${producto.id}]]</td>
+                                            <td>[[${producto.nombre}]]</td>
+                                            <td>[[${producto.descripcion}]]</td>
+                                            <td>[[${producto.precio}]]</td>
+                                            <td>[[${producto.stock}]]</td>      
                                             <td>
-                                                <a th:href="@{/producto/eliminar/}+${producto.idProducto}"
+                                                <a th:href="@{/producto/eliminar/}+${producto.id}"
                                                    class="btn btn-outline-danger me-2"
                                                    data-bs-toggle="tooltip" 
                                                    data-bs-placement="top" 
-                                                   title="Eliminar categoría">
+                                                   title="Eliminar producto">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                                 </a>
-                                                <a th:href="@{/producto/modificar/}+${producto.idProducto}"
+                                                <a th:href="@{/producto/modificar/}+${producto.id}"
                                                    class="btn btn-outline-success me-2"
                                                    data-bs-toggle="tooltip" 
                                                    data-bs-placement="top" 
-                                                   title="Modificar categoría">
+                                                   title="Modificar producto">
                                                     <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
                                                 </a>
                                             </td>
@@ -77,19 +73,54 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card text-center bg-light text-primary mb-3 shadow" style="border-radius: 15px;">                           
-                            <div class="card-body">
-                                <h3 style="font-size: 1.5rem;">[[#{producto.total}]]</h3>
-                                <h4 class="fs-2" style="font-size: 2.5rem;"></i> [[${totalProductos}]]</h4>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- 3 Fragmento para agregar una producto -->
+        <!-- Fragmento utilizado en el menu desplegable -->
+        <section th:fragment="listadoProductos" id="productos">
+            <div th:if="${productos != null and !productos.empty}">
+                <table class="table table-striped table-hover">
+                    <tr><th>#</th>
+                        <th>[[#{producto.producto}]]</th>
+                        <th>[[#{producto.nombre}]]</th>
+                        <th>[[#{producto.descripcion}]]</th>
+                        <th>[[#{producto.precio}]]</th>
+                        <th>[[#{producto.stock}]]</th>
+                        <th></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="producto, contador : ${productos}">
+                            <td>[[#{producto.id}]]</td>
+                            <td>[[#{producto.producto}]]</td>
+                            <td>[[#{producto.nombre}]]</td>
+                            <td>[[#{producto.descripcion}]]</td>
+                            <td>[[#{producto.precio}]]</td>
+                            <td>[[#{producto.stock}]]</td>      
+                            <td>
+                                <a th:href="@{/producto/eliminar/}+${producto.idProducto}"
+                                   class="btn btn-outline-danger me-2"
+                                   data-bs-toggle="tooltip" 
+                                   data-bs-placement="top" 
+                                   title="Eliminar categoría">
+                                    <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
+                                </a>
+                                <a th:href="@{/producto/modificar/}+${producto.idProducto}"
+                                   class="btn btn-outline-success me-2"
+                                   data-bs-toggle="tooltip" 
+                                   data-bs-placement="top" 
+                                   title="Modificar categoría">
+                                    <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center p-2" th:if="${productos == null or productos.empty}">
+                <span>[[#{lista.vacia}]]</span>
+            </div>
+        </section>        
+        <!-- Fragmento para agregar un producto -->
         <section th:fragment="agregarProducto">
             <div id="agregarProducto" 
                  class="modal fade" 
@@ -110,7 +141,7 @@
                                     <label for="id">[[#{producto.id}]]</label>
                                 </div>                                
                                 <div class="form-floating mb-3">
-                                    <input type="number" class="form-control rounded-3" id="categoria" name="categoria" placeholder="categoria" required="true"/>
+                                    <input type="number" class="form-control rounded-3" id="producto" name="producto" placeholder="producto" required="true"/>
                                     <label for="categoria">[[#{producto.categoria}]]</label>
                                 </div>  
                                 <div class="form-floating mb-3">
@@ -131,7 +162,7 @@
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control rounded-3" type="file" name="imagenFile" id="imagenFile" onchange="readURL(this);"/>
-                                    <label for="imagenFile"></label>
+                                    <label for="imagen"></label>
                                     <img id="blah" src="#" alt=" " height="200" class="mt-3"/>
                                 </div>
                                 <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">[[#{accion.guardar}]]</button>
@@ -141,9 +172,8 @@
                 </div>
             </div>
         </section>
-
-        <!-- 4 Fragmento que se utiliza en la página modifca.html -->
-        <section th:fragment="editarProducto">
+        <!-- Fragmento que se utiliza en la página modifca.html -->
+        <section th:fragment="editarProductos">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class=" rounded-4 shadow">
@@ -156,7 +186,7 @@
                                   th:object="${producto}"
                                   class="was-validated"                          
                                   enctype="multipart/form-data">
-                                <input type="hidden" name="idProducto" th:field="*{idProducto}"/>
+                                <input type="hidden" name="id" th:field="*{id}"/>
                                 <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
                                 <div class="form-floating mb-3">
                                     <input type="number" class="form-control rounded-3" 
@@ -168,7 +198,7 @@
                                     <input type="number" class="form-control rounded-3" 
                                            name="categoria" th:field="*{categoria}"
                                            placeholder="categoria" required="true">
-                                        <label for="categoria">[[#{producto.categoria}]]</label>
+                                        <label for="producto">[[#{producto.categoria}]]</label>
                                 </div>                                
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control rounded-3" 
@@ -214,34 +244,102 @@
                     </div>
                 </div>
             </div>
+        </section>        
+        <!-- Fragmento que se utiliza en la página modifica.html -->
+        <section th:fragment="editarProducto">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="rounded-4 shadow">
+                        <div class="card-header p-5 pb-4 border-bottom-0">
+                            <h1 class="fw-bold mb-0 fs-2">[[#{accion.actualizar}]]</h1>
+                        </div>
+                        <div class="card-body p-5 pt-0">
+                            <form method="POST"
+                                  th:action="@{/producto/guardar}" 
+                                  th:object="${producto}"
+                                  class="was-validated"                          
+                                  enctype="multipart/form-data">
+                                <input type="hidden" name="id" th:field="*{id}"/>
+                                <input type="hidden" name="rutaImagen" th:field="*{rutaImagen}"/>
+
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control rounded-3" 
+                                           name="id" th:field="*{id}"
+                                           placeholder="id" required="true">
+                                        <label for="id">[[#{producto.id}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control rounded-3" 
+                                           name="categoria" th:field="*{categoria}"
+                                           required="true">
+                                        <label for="categoria">[[#{producto.categoria}]]</label>
+                                </div> 
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-3" 
+                                           name="nombre" th:field="*{nombre}"
+                                           placeholder="nombre" required="true">
+                                        <label for="nombre">[[#{producto.nombre}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-3" 
+                                           name="descripcion" th:field="*{descripcion}"
+                                           required="true">
+                                        <label for="descripcion">[[#{producto.descripcion}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control rounded-3" 
+                                           name="precio" th:field="*{precio}"
+                                           required="true">
+                                        <label for="precio">[[#{producto.precio}]]</label>
+                                </div>   
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control rounded-3" 
+                                           name="stock" th:field="*{stock}"
+                                           required="true">
+                                        <label for="stock">[[#{producto.stock}]]</label>
+                                </div>  
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);"/>
+                                    <img id="blah" src="#" alt="your image" height="200"/>
+                                </div>                                
+                                <div class=" mb-3">
+                                    <label for="activo">[[#{producto.activo}]]</label>
+                                    <input class="form-check-input" 
+                                           type="checkbox" 
+                                           name="activo" 
+                                           id="activo"
+                                           th:field="*{activo}">
+                                </div>
+                        </div>
+                        <section th:replace="~{producto/fragmentos :: botonesEditar}"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
-
-
-        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+        <!-- Fragmento que se utiliza en el fragmento anterior -->
         <section th:fragment="botonesEditar">
             <div class="container py-4 mb-4">
                 <div class="row">
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/producto/listado}" 
-                           class="btn btn-outline-primary me-2"
+                        <a th:href="@{/producto/listado}" class="btn btn-outline-primary me-2"
                            data-bs-toggle="tooltip" 
                            data-bs-placement="top" 
                            title="Regresar">
                             <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                         </a>
                     </div>
-                    <div class="col-md-4 d-grid">                                
-                        <a th:href="@{/producto/eliminar/}+${producto.idProducto}"
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/producto/eliminar/}+${producto.id}" 
                            class="btn btn-outline-danger me-2"
                            data-bs-toggle="tooltip" 
                            data-bs-placement="top" 
-                           title="Eliminar">
+                           title="Eliminar categoría">
                             <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                         </a>
                     </div>
                     <div class="col-md-4 d-grid">
-                        <button type="submit" 
-                                class="btn btn-outline-success me-2"
+                        <button type="submit" class="btn btn-outline-success me-2"
                                 data-bs-toggle="tooltip" 
                                 data-bs-placement="top" 
                                 title="Guardar">
@@ -250,6 +348,5 @@
                     </div>
                 </div>
             </div>
-        </section>
-        
+        </section>        
 </html>
