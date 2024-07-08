@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
-    <head th:replace="~{layout/plantilla :: head}">
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                </head>
-                <body>
-                <section th:replace="~{categoria/fragmentos :: iniciarSesion}"/>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+  <head th:replace="~{layout/plantilla :: head}">
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <section th:replace="~{categoria/fragmentos :: iniciarSesion}" />
 
-                <header th:replace="~{layout/plantilla :: header}"/>
-                <section th:replace="~{layout/plantilla :: banner}"/>
-                <section th:replace="~{layout/plantilla :: container}">
-                    <aside th:replace="~{layout/plantilla :: vendido}"/>
-                    <div th:replace="~{layout/plantilla :: compras}"/>
-                    <div th:replace="~{layout/plantilla :: busqueda}"/>
-                </section>
+    <header th:replace="~{layout/plantilla :: header}" />
+    <section th:replace="~{layout/plantilla :: banner}" />
+    <section th:replace="~{layout/plantilla :: container}">
+      <aside th:replace="~{layout/plantilla :: vendido}" />
+      <div th:replace="~{layout/plantilla :: compras}" />
+      <div th:replace="~{layout/plantilla :: busqueda}" />
+    </section>
 
-                <footer th:replace="~{layout/plantilla :: footer}"/>
-                </body>
-          </html>
+    <footer th:replace="~{layout/plantilla :: footer}" />
+    =======
+  </body>
+</html>
