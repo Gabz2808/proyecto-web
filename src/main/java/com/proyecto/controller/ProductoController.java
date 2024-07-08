@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@Slf4j
-@RequestMapping("/producto")
 public class ProductoController {
     
     @Autowired
@@ -63,5 +61,10 @@ public class ProductoController {
         producto = productoService.getProducto(producto);
         model.addAttribute("producto", producto);
         return "/producto/modifica";
+    }
+    @GetMapping("/productos")
+    public String productos(Model model) {
+        model.addAttribute("productos", productoService.getProductos(true));
+        return "/productos";
     }
 }

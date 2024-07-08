@@ -22,7 +22,24 @@
                 </div>
             </div>
         </section>
+
+        <!-- Tarjetas-->
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div th:fragment="tarjetas" th:each="producto, contador : ${productos}" class="card mx-2 mb-3" style="width: 18rem;">
+                    <img th:src="${producto.rutaImagen}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${producto.nombre}"></h5>
+                        <p class="card-text" th:text="${producto.descripcion}"></p>
+                        <a href="/" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Listado de productos-->
+
         <section th:fragment="listado" id="productos">
             <div class="container">
                 <div class="row">
