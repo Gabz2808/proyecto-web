@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+
+
+<section th:replace="~{categoria/fragmentos :: iniciarSesion}"/>
+
+<header th:replace="~{layout/plantilla :: header}"/>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/servicios%2Fmantenimiento.jpg?alt=media&token=691136af-0e34-485b-a0f0-b6b8d7002c69" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Mantenimiento</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/servicios%2FMejoras.jpg?alt=media&token=a9bf5b7f-3f06-4ed1-b579-850752fb339d" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Mejoras</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/servicios%2FCreacion-pagina-web.jpg?alt=media&token=456c0c11-2219-43c7-8f5a-e792b2c6a86c" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Creación de Página Web</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{layout/plantilla :: footer}"/>
+
+
+</div>
+</body>
+</html>

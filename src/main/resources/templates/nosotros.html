@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Bienvenidos a Grama - Tu Tienda de Tecnología</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header, footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        .section p {
+            margin-bottom: 15px;
+        }
+        footer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}">
+    <h1>Bienvenidos a Grama</h1>
+</header>
+
+<div class="container">
+    <div class="section">
+        <h2>¿Quiénes Somos?</h2>
+        <p>Somos apasionados de la tecnología y nos especializamos en ofrecer una amplia gama de productos informáticos de alta calidad. Nuestra tienda es el destino ideal para todas tus necesidades tecnológicas.</p>
+    </div>
+
+    <div class="section">
+        <h2>Nuestros Servicios</h2>
+        <p><strong>Venta de Productos Informáticos:</strong> Contamos con un extenso catálogo de hardware, software y accesorios de marcas reconocidas.</p>
+        <p><strong>Ensamblaje de Computadoras:</strong> Servicios personalizados para gaming, trabajo profesional o uso personal.</p>
+        <p><strong>Revisión y Mantenimiento:</strong> Revisiones completas y mantenimiento de equipos para asegurar su óptimo funcionamiento.</p>
+        <p><strong>Asesoría Técnica:</strong> Expertos que te ayudarán a elegir y configurar tus equipos informáticos.</p>
+    </div>
+
+    <div class="section">
+        <h2>Visítanos</h2>
+        <p>Te invitamos a visitar nuestra tienda y descubrir todo lo que Grama tiene para ofrecerte. Estamos comprometidos con la satisfacción del cliente y la calidad de nuestros productos y servicios.</p>
+    </div>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}">
+    <p>&copy; 2024 Grama. Todos los derechos reservados.</p>
+</footer>
+</body>
+</html>
