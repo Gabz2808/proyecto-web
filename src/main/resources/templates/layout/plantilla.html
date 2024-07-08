@@ -1,294 +1,388 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
-    <title>[[#{aplicacion.titulo}]]</title>
-    <meta charset="UTF-8"/>
-    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
-    <style>
-        /* Estilos CSS generales */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh; /* Altura mínima de la ventana */
-        }
 
-        /* Estilos para el contenido principal */
-        main {
-            flex: 1; /* Esto hace que el contenido principal ocupe el espacio restante */
-            padding: 20px;
-            display: flex;
-            justify-content: space-between; /* Alinear a los extremos horizontales */
-        }
+    <head th:fragment="head">
+        <title>[[#{aplicacion.titulo}]]</title>
+        <meta charset="UTF-8" />
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet" />
+        <style>
+            /* Estilos CSS generales */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                /* Altura mínima de la ventana */
+            }
 
-        /* Estilos para los aside */
-        aside {
-            border: 2px solid #ccc;
-            padding: 10px;
-            width: 250px;
-            margin: 20px;
-        }
+            /* Estilos para el contenido principal */
+            main {
+                flex: 1;
+                /* Esto hace que el contenido principal ocupe el espacio restante */
+                padding: 20px;
+                display: flex;
+                justify-content: space-between;
+                /* Alinear a los extremos horizontales */
+            }
 
-        aside.left {
-            float: left; /* Alinear a la izquierda */
-            margin-right: 20px; /* Espacio entre los aside */
-        }
+            /* Estilos para los aside */
+            aside {
+                border: 2px solid #ccc;
+                padding: 10px;
+                width: 250px;
+                margin: 20px;
+            }
 
-        .right {
-            position: fixed;
-            right: 20px; /* distancia desde el borde derecho */
-            top: 125px;
-        }
+            aside.left {
+                float: left;
+                /* Alinear a la izquierda */
+                margin-right: 20px;
+                /* Espacio entre los aside */
+            }
 
-        aside h2 {
-            font-size: 20px;
-            color: #333;
-            margin-bottom: 10px;
-        }
+            .right {
+                position: fixed;
+                right: 20px;
+                /* distancia desde el borde derecho */
+                top: 125px;
+            }
 
-        .producto img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
+            aside h2 {
+                font-size: 20px;
+                color: #333;
+                margin-bottom: 10px;
+            }
 
-        .producto h3 {
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
+            .producto img {
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
 
-        .producto p {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 5px;
-        }
+            .producto h3 {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
 
-        .producto strong {
-            color: #333;
-        }
+            .producto p {
+                font-size: 14px;
+                color: #666;
+                margin-bottom: 5px;
+            }
 
-        .producto a {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
+            .producto strong {
+                color: #333;
+            }
 
-        .producto a:hover {
-            background-color: #0056b3;
-        }
+            .producto a {
+                display: inline-block;
+                padding: 5px 10px;
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
 
-        .compras ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+            .producto a:hover {
+                background-color: #0056b3;
+            }
 
-        .compras li {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
+            .compras ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
 
-        .compras li:before {
-            content: "\2022";
-            color: #007bff;
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
+            .compras li {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
 
-        header {
-            background-color: #f8f9fa;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+            .compras li:before {
+                content: "\2022";
+                color: #007bff;
+                font-weight: bold;
+                display: inline-block;
+                width: 1em;
+                margin-left: -1em;
+            }
 
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 10px 20px;
-            margin-top: auto;
-        }
+            header {
+                background-color: #f8f9fa;
+                padding: 10px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
 
-        .nav-link {
-            color: #343a40;
-            text-decoration: none;
-            font-weight: bold;
-            margin-left: 10px;
-        }
+            footer {
+                background-color: #343a40;
+                color: white;
+                padding: 10px 20px;
+                margin-top: auto;
+            }
 
-        .nav-link:hover {
-            text-decoration: underline;
-        }
+            .nav-link {
+                color: #343a40;
+                text-decoration: none;
+                font-weight: bold;
+                margin-left: 10px;
+            }
 
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            position: fixed;
-            top: 125px;
-            left: 40%;
+            .nav-link:hover {
+                text-decoration: underline;
+            }
 
-        }
-        .search-container input[type="text"] {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        .search-container button {
-            padding: 10px 20px;
-            margin-left: 10px;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .search-container button:hover {
-            background-color: #0056b3;
-        }
-        .search-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+            .search-container {
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                display: flex;
+                align-items: center;
+                position: fixed;
+                top: 125px;
+                left: 40%;
+            }
 
-        .search-input-container {
-            flex: 1;
-            margin-right: 10px;
-        }
+            .search-container input[type="text"] {
+                flex: 1;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 16px;
+            }
 
-        .dropdown {
-            flex: 0 0 auto;
-        }
+            .search-container button {
+                padding: 10px 20px;
+                margin-left: 10px;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
 
-    </style>
-</head>
-<body>
+            .search-container button:hover {
+                background-color: #0056b3;
+            }
 
-<div th:fragment="busqueda" class="search-container">
-    <div class="search-input-container">
-        <input type="text" id="searchInput" placeholder="Buscar..." class="form-control">
-    </div>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Ordenar por
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-    </div>
-</div>
+            .search-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
 
 
-<header th:fragment="header">
-    <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-        <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/logo.png?alt=media&token=c4240c45-6716-49ef-b092-aaef1d8e51c4" width="100px" height="100px" alt="logo">
-    </a>
-    <nav class="nav">
-        <a href="/" class="nav-link">[[#{accion.inicio}]]</a>
-        <a href="#" class="nav-link">[[#{plantilla.productos}]]</a>
-        <a href="#" class="nav-link">[[#{plantilla.categorias}]]</a>
-        <a href="#" class="nav-link">[[#{aplicacion.preguntas}]]</a>
-        <a href="#" class="nav-link">[[#{aplicacion.nosotros}]]</a>
-    </nav>
-    <div th:if="${isLoggedIn}">
-        <!-- Contenido para usuario autenticado -->
-        <button type="button" class="btn btn-outline-primary me-2">
-            <i></i> [[#{usuario.perfil}]]
-        </button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='/logout'">
-            <i></i> [[#{login.logout}]]
-        </button>
+            .banner {
+                max-height: 200px;
+                width: 100%;
+            }
 
-    </div>
+            ._descripcion{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .dropdown {
+                flex: 0 0 auto;
+            }
 
 
-    <div th:unless="${isLoggedIn}">
-        <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href='/login'">
-            <i></i> [[#{login.login}]]
-        </button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='/register'">
-            <i></i> [[#{usuario.agregar}]]
-        </button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='/perfil'">
-        <i class="fas fa-user"></i>
-        </button>
+            .search_bar {
+                border-radius: 15px;
+                width: 100%;
+                outline: none;
+                border: none;
+                padding: 10px;
+                border: 1px solid #ccc;
+            }
+            .center {
+                width: 100%;
+                gap: 40px;
+                padding: 0px 20px;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+            }
+            .left {
+                height: 100vh;
+                width: 25%;
+            }
 
-    </div>
-</header>
+            ._right {
+                height: 100vh;
+                width: 25%;
+                gap: 10px;
+                display: flex;
+                flex-direction: column;
 
+            }
 
-    <aside class="left" th:fragment="vendido">
-        <h2>Producto más vendido</h2>
-        <div class="producto">
-            <img src="ruta/a/la/imagen-del-producto.jpg" alt="Producto más vendido">
-            <h3>Nombre del Producto</h3>
-            <p>Descripción breve del producto más vendido.</p>
-            <p><strong>Precio:</strong> $XX.XX</p>
-            <a href="enlace-al-producto">Ver más</a>
+            ._container  {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                width: 100%;
+                height: 100%;
+                margin-top: 40px;
+            }
+
+            .container_search_bar {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                max-height: 40px;
+                gap: 10px;
+            }
+
+            .button_search {
+                border-radius: 10px;
+                border: none;
+                padding: 10px 20px;
+                background-color: transparent;
+                color: white;
+                font-family: sans-serif;
+                cursor: pointer;
+                background-color: #0056b3;
+            }
+
+            .description {
+                width: 100%;
+                height: 100%;
+                margin-top: 10px;
+            }
+
+            .right_list {
+                height: 30%;
+          
+            }
+
+            .right_contact {
+                height: 30%;
+
+            }
+
+            .footer {
+                height: 100px;
+                margin-top: 20px;
+                text-align: center;
+                background-color: whitesmoke;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <header th:fragment="header">
+            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/logo.png?alt=media&token=c4240c45-6716-49ef-b092-aaef1d8e51c4" width="100px" height="100px" alt="logo">
+            </a>
+            <nav class="nav">
+                <a href="/" class="nav-link">[[#{accion.inicio}]]</a>
+                <a href="#" class="nav-link">[[#{plantilla.productos}]]</a>
+                <a href="#" class="nav-link">[[#{plantilla.categorias}]]</a>
+                <a href="#" class="nav-link">[[#{aplicacion.preguntas}]]</a>
+                <a href="#" class="nav-link">[[#{aplicacion.nosotros}]]</a>
+            </nav>
+            <div th:if="${isLoggedIn}">
+                <!-- Contenido para usuario autenticado -->
+                <button type="button" class="btn btn-outline-primary me-2">
+                    <i></i> [[#{usuario.perfil}]]
+                </button>
+                <button type="button" class="btn btn-primary" onclick="window.location.href = '/logout'">
+                    <i></i> [[#{login.logout}]]
+                </button>
+
+            </div>
+
+            <div th:unless="${isLoggedIn}">
+                <button type="button" class="btn btn-outline-primary me-2" onclick="window.location.href = '/login'">
+                    <i></i> [[#{login.login}]]
+                </button>
+                <button type="button" class="btn btn-primary" onclick="window.location.href = '/register'">
+                    <i></i> [[#{usuario.agregar}]]
+                </button>
+                <button type="button" class="btn btn-primary" onclick="window.location.href = '/perfil'">
+                    <i class="fas fa-user"></i>
+                </button>
+
+        </header>
         </div>
-    </aside>
 
-<div th:fragment="compras" class="right">
-<aside  th:fragment="compras">
-    <h2>Lista de compras</h2>
-    <ul class="compras">
-        <li>Producto 1</li>
-        <li>Producto 2</li>
-        <li>Producto 3</li>
-    </ul>
-    <button type="button" class="btn btn-outline-primary me-2">
-        <i></i> Comprar
-    </button>
-</aside>
+        <img th:fragment="banner" src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/Bienvenido%20Grama.png?alt=media&token=b1b3a721-3689-4aec-b15d-27490ebf1fbb" alt="Banner" class="banner" />
 
-    <aside  th:fragment="contactos">
-        <h2>Contactos de la empresa</h2>
-        <ul>
-            <li><strong>Teléfono:</strong> +1234567890</li>
-            <li><strong>Correo electrónico:</strong> info@empresa.com</li>
-        </ul>
-    </aside>
-</div>
+        <div th:fragment="container" class="_container">
+            <div  th:fragment="vendido" class="left">
+                <p><h2>Producto más vendido</h2>
+                    <div class="producto">
+                        <img src="ruta/a/la/imagen-del-producto.jpg" alt="Producto más vendido">
+                            <h3>Nombre del Producto</h3>
+                            <p>Descripción breve del producto más vendido.</p>
+                            <p><strong>Precio:</strong> $XX.XX</p>
+                            <a href="enlace-al-producto">Ver más</a>
+                    </div></p>
+            </div>
+            <div  th:fragment="busqueda" class="center">
+                <div class="container_search_bar">
+                    <input type="text" class="search_bar" placeholder="Buscar producto"> 
+                        <button class="button_search">Buscar</button>
+                </div>
 
-<footer th:fragment="footer">
-    <div>
-        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-            <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-        <span class="mb-3 mb-md-0 text-body-secondary">© [[#{plantilla.derechos}]]</span>
-    </div>
-    <ul class="nav list-unstyled d-flex">
-        <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com"><svg width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
-            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334q.002-.211-.006-.422A6.7 6.7 0 0 0 16 3.542a6.7 6.7 0 0 1-1.889.518 3.3 3.3 0 0 0 1.447-1.817 6.5 6.5 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.32 9.32 0 0 1-6.767-3.429 3.29 3.29 0 0 0 1.018 4.382A3.3 3.3 0 0 1 .64 6.575v.045a3.29 3.29 0 0 0 2.632 3.218 3.2 3.2 0 0 1-.865.115 3 3 0 0 1-.614-.057 3.28 3.28 0 0 0 3.067 2.277A6.6 6.6 0 0 1 .78 13.58a6 6 0 0 1-.78-.045A9.34 9.34 0 0 0 5.026 15"/>
-        </svg></a></li>
-        <li class="ms-3"><a class="text-body-secondary" href="https://instagram.com"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-            <path d="M8 0C5.829 0 5.556.01 4.702.048a3.9 3.9 0 0 0-1.416.372 3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 3.76c-.197.51-.332 1.091-.372 1.942C.01 5.556 0 5.828 0 8s.01 2.445.048 3.299c.04.851.175 1.433.372 1.942a3.9 3.9 0 0 0 .923 1.417c.445.445.891.718 1.417.923.509.197 1.09.332 1.942.372C5.556 15.99 5.828 16 8 16s2.445-.01 3.299-.048c.851-.04 1.433-.175 1.942-.372a3.9 3.9 0 0 0 1.417-.923 3.9 3.9 0 0 0 .923-1.417c.197-.509.332-1.09.372-1.942.038-.854.048-1.126.048-3.299s-.01-2.445-.048-3.298c-.04-.851-.175-1.433-.372-1.942a3.9 3.9 0 0 0-.923-1.417 3.9 3.9 0 0 0-1.417-.923A3.9 3.9 0 0 0 12.24.42c-.51-.198-1.092-.333-1.942-.372C10.443.01 10.171 0 8 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-        </svg></a></li>
-        <li class="ms-3"><a class="text-body-secondary" href="https://facebook.com"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
-        </svg></a></li>
-    </ul>
-</footer>
+                <div class="description">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/discount%20grama.png?alt=media&token=37776829-b0a2-4587-9aab-21cb190aa43d" alt="Descripcion" class="_descripcion"/>
+                </div>
+            </div>
+            <div th:fragment="compras" class="_right">
+                <div class="right_list">            <h2>Lista de compras</h2>
+                    <ul class="compras">
+                        <li>Producto 1</li>
+                        <li>Producto 2</li>
+                        <li>Producto 3</li>
+                    </ul>
+                    <button type="button" class="btn btn-outline-primary me-2">
+                        <i></i> Comprar
+                    </button></div>
+                <div  th:fragment="contactos" class="right_contact"> <h2>Contactos de la empresa</h2>
+                    <ul>
+                        <li><strong>Teléfono:</strong> +1234567890</li>
+                        <li><strong>Correo electrónico:</strong> info@empresa.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-</body>
+        <div th:fragment="footer" class="footer">
+            <div>
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <span class="mb-3 mb-md-0 text-body-secondary">© [[#{plantilla.derechos}]]</span>
+            </div>
+            <ul class="nav list-unstyled d-flex">
+                <li class="ms-3"><a class="text-body-secondary" href="https://twitter.com"><svg width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334q.002-.211-.006-.422A6.7 6.7 0 0 0 16 3.542a6.7 6.7 0 0 1-1.889.518 3.3 3.3 0 0 0 1.447-1.817 6.5 6.5 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.32 9.32 0 0 1-6.767-3.429 3.29 3.29 0 0 0 1.018 4.382A3.3 3.3 0 0 1 .64 6.575v.045a3.29 3.29 0 0 0 2.632 3.218 3.2 3.2 0 0 1-.865.115 3 3 0 0 1-.614-.057 3.28 3.28 0 0 0 3.067 2.277A6.6 6.6 0 0 1 .78 13.58a6 6 0 0 1-.78-.045A9.34 9.34 0 0 0 5.026 15" />
+                        </svg></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="https://instagram.com"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                            <path d="M8 0C5.829 0 5.556.01 4.702.048a3.9 3.9 0 0 0-1.416.372 3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 3.76c-.197.51-.332 1.091-.372 1.942C.01 5.556 0 5.828 0 8s.01 2.445.048 3.299c.04.851.175 1.433.372 1.942a3.9 3.9 0 0 0 .923 1.417c.445.445.891.718 1.417.923.509.197 1.09.332 1.942.372C5.556 15.99 5.828 16 8 16s2.445-.01 3.299-.048c.851-.04 1.433-.175 1.942-.372a3.9 3.9 0 0 0 1.417-.923 3.9 3.9 0 0 0 .923-1.417c.197-.509.332-1.09.372-1.942.038-.854.048-1.126.048-3.299s-.01-2.445-.048-3.298c-.04-.851-.175-1.433-.372-1.942a3.9 3.9 0 0 0-.923-1.417 3.9 3.9 0 0 0-1.417-.923A3.9 3.9 0 0 0 12.24.42c-.51-.198-1.092-.333-1.942-.372C10.443.01 10.171 0 8 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+                        </svg></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="https://facebook.com"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                        </svg></a></li>
+            </ul>
+        </div>
+
+         
+    </body>
+
 </html>
