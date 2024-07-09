@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>Registrarse</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<style>
+.error-box {
+background-color: #fff;
+padding: 20px;
+border: 1px solid #ccc;
+border-radius: 5px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+text-align: center;
+width: 300px;
+}
+.error-message {
+color: #ff0000;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+</style>
+
+<header th:replace="~{layout/plantilla :: header}"/>
+
+
+    <div th:if="${errorVisible}" class="alert alert-danger" role="alert">
+        Ocurrió un error al procesar su solicitud.
+    </div>
+
+
+<div class="container mb-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Registrarse</h5>
+                    <form action="#" th:action="@{/register}" method="post" class="needs-validation" novalidate>
+
+                        <div class="mb-3">
+                            <label for="inputName" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="inputName" name="nombreCompleto" placeholder="Nombre completo" required>
+                            <div class="invalid-feedback">
+                                Por favor ingresa tu nombre completo.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Ingrese su email" required>
+                            <div class="invalid-feedback">
+                                Por favor ingresa un correo válido.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword" name="contrasena" placeholder="Contraseña" required>
+                            <div class="invalid-feedback">
+                                Por favor ingresa tu contraseña.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña" required>
+                            <div class="invalid-feedback">
+                                Por favor confirma tu contraseña.
+                            </div>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                            <label class="form-check-label" for="termsCheck">Acepto los <a href="/terms" target="_blank">términos y condiciones</a></label>
+                            <div class="invalid-feedback">
+                                Debes aceptar los términos y condiciones para continuar.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+
+</body>
+</html>

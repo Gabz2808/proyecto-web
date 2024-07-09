@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+
+
+<section th:replace="~{categoria/fragmentos :: iniciarSesion}"/>
+
+<header th:replace="~{layout/plantilla :: header}"/>
+<div class="container mb-5">
+    <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/servicios%2Fmantenimiento.jpg?alt=media&token=691136af-0e34-485b-a0f0-b6b8d7002c69" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Mantenimiento</h5>
+                    <p class="card-text">Nuestro servicio de mantenimiento está diseñado para mantener tus sistemas informáticos en óptimas condiciones de funcionamiento y seguridad. Realizamos revisiones periódicas, diagnósticos preventivos, actualizaciones de software, limpieza física de equipos, eliminación de virus y malware, y otras acciones necesarias para asegurar la estabilidad y confiabilidad de tus dispositivos.</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/servicios%2FMejoras.jpg?alt=media&token=a9bf5b7f-3f06-4ed1-b579-850752fb339d" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Mejoras de computadoras</h5>
+                    <p class="card-text">Ofrecemos servicios especializados en mejorar el rendimiento y la funcionalidad de tus equipos informáticos. Desde la actualización de componentes como memoria RAM, discos duros y tarjetas gráficas hasta la optimización del sistema operativo y software, nos aseguramos de que tu computadora funcione de manera más rápida, eficiente y adecuada a tus necesidades.</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/servicios%2FCreacion-pagina-web.jpg?alt=media&token=456c0c11-2219-43c7-8f5a-e792b2c6a86c" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Creación de Página Web</h5>
+                    <p class="card-text">Nos especializamos en el desarrollo de sitios web modernos y funcionales que se adaptan a tus objetivos comerciales. Desde páginas web estáticas hasta complejas plataformas de comercio electrónico, nuestro equipo utiliza las últimas tecnologías y prácticas de desarrollo para crear sitios web intuitivos, responsivos y visualmente atractivos. Además, ofrecemos servicios de mantenimiento continuo y optimización para asegurar que tu presencia en línea siempre esté actualizada y funcione de manera óptima.</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{layout/plantilla :: footer}"/>
+
+
+</div>
+</body>
+</html>

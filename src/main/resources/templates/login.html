@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<header th:replace="~{layout/plantilla :: header}"/>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Iniciar sesión</h5>
+                    <form action="#" th:action="@{/login}" method="post" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">Dirección de correo electrónico</label>
+                            <input type="email" class="form-control" id="inputEmail" name="correo" placeholder="Ingresa tu correo electrónico" required>
+                            <div class="invalid-feedback">
+                                Por favor ingresa un correo válido.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword" name="contrasena" placeholder="Contraseña" required>
+                            <div class="invalid-feedback">
+                                Por favor ingresa tu contraseña.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{layout/plantilla :: footer}"/>
+
+
+
+</body>
+</html>
