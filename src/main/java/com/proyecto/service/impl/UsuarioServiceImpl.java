@@ -38,16 +38,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuarioDao.delete(usuario);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Usuario findByEmailAndPassword(String email, String contrasena) {
-        return usuarioDao.findByEmailAndContrasena(email, contrasena);
-    }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Usuario findByEmail(String email) {
-        return usuarioDao.findByEmail(email);
-    }
+
+
 
 }
