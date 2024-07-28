@@ -17,7 +17,7 @@ public class Usuario implements Serializable {
 
     private String nombreCompleto;
     private String email;
-    private String contrasena;
+    private String password;
     private boolean esAdmin = false;
 
 

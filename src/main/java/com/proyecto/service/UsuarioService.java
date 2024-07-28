@@ -13,8 +13,6 @@ public interface UsuarioService {
 
     public void delete(Usuario usuario);
 
-    Usuario findByEmailAndPassword(String email, String contrasena);
 
-    Usuario findByEmail(String email);
 
 }
