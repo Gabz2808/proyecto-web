@@ -212,6 +212,13 @@
                     height: 30%;
                 }
 
+                hr {
+                    border: none; /* Elimina el borde por defecto */
+                    height: 1px; /* Define el grosor de la línea */
+                    background-color: #53E7C5; /* Define el color de la línea */
+                    margin: 10px 10px; /* Añade espacio alrededor de la línea */
+                }
+
 
             </style>
 
@@ -219,8 +226,9 @@
     <body>
 
 
-
+        <!--Barra de busqueda -->
         <div  th:fragment="busqueda" class="center mt-1">
+            <hr>
             <div class="container_search_bar">
                 <input type="text" class="search_bar" placeholder="Buscar producto...">
                     <button class="button_search">Buscar</button>
@@ -229,16 +237,19 @@
 
         </div>
 
+        
         <header th:fragment="header">
             <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
                 <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/logo.png?alt=media&token=c4240c45-6716-49ef-b092-aaef1d8e51c4" width="100px" height="100px" alt="logo">
             </a>
+            <!-- Menu con los distintos apartados de la pagina -->
             <nav class="nav">
                 <a href="/" class="nav-link">[[#{accion.inicio}]]</a>
                 <a href="/productos" class="nav-link">[[#{plantilla.productos}]]</a>
                 <a href="/servicios" class="nav-link">Servicios</a>
                 <a href="/nosotros" class="nav-link">[[#{aplicacion.nosotros}]]</a>
             </nav>
+            <!-- comment -->
             <div th:if="${isLoggedIn}">
                 <button type="button" class="btn btn-outline-primary me-2">
                     <i></i> [[#{usuario.perfil}]]
@@ -280,7 +291,7 @@
             <div class="description" th:fragment="description">
                 <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/discount%20grama.png?alt=media&token=37776829-b0a2-4587-9aab-21cb190aa43d" alt="Descripcion" class="_descripcion"/>
             </div>
-            
+
             <!-- Recuadro que muestra la lista de compras-->  
             <div th:fragment="compras" class="_right mb-3" style="text-align: center; margin-top: 20px;">
                 <div class="right_list">
@@ -298,7 +309,7 @@
 
         </div>
 
-        <!-- Footer con informacion de contcato y redes sociales-->  
+        <!-- Footer con informacion de contacto y redes sociales-->  
         <footer th:fragment="footer" style="text-align: center; padding: 1rem;">
             <div>
                 <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
