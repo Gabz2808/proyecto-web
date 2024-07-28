@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-<head th:replace="~{layout/plantilla :: head}">
-    <title>TODO supply a title</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .card {
-        width: 100%;
-        border: none; /* Quitamos el borde predeterminado */
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Agregamos una sombra ligera */
-        transition: box-shadow 0.3s ease; /* Efecto de transición en la sombra */
-    }
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    .card {
+                        width: 100%;
+                        border: none; /* Quitamos el borde predeterminado */
+                        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Agregamos una sombra ligera */
+                        transition: box-shadow 0.3s ease; /* Efecto de transición en la sombra */
+                    }
 
-    .card:hover {
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Aumentamos la sombra al pasar el mouse */
-    }
+                    .card:hover {
+                        box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Aumentamos la sombra al pasar el mouse */
+                    }
 
-    </style>
-</head>
-<body>
+                </style>
+                </head>
+                <body>
 
-<header th:replace="~{layout/plantilla :: header}"/>
-<h1>
-    WIP
-</h1>
+                    <header th:replace="~{layout/plantilla :: header}"/>
 
-<div class="container d-flex justify-content-center mt-5">
-    <div class="card mb-3" style="max-width: 800px;">
-        <div class="row g-0">
-            <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">Perfil</h5>
-                    <p class="card-text">Nombre completo</p>
-                    <p class="card-text">Cédula</p>
-                    <p class="card-text">Correo Electrónico</p>
-                    <p class="card-text">Teléfono</p>
-                    <button type="button" class="btn btn-primary">Editar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                style="align-content: end; background-color:transparent; border: none; color: black; margin-top: 1.5px;"><strong>
+                                Menú Categorias </strong>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" style="color: black;"onclick="window.location.href = '/categoria/listad'">Categorias</a></li>
+                            <li><a class="dropdown-item" style="color: black;"onclick="window.location.href = '/producto/listado'"</a>Productos</li>                       
+                        </ul>
+                    </div>
 
+                    <div class="container d-flex justify-content-center mt-5">
+                        <div class="card mb-3" style="max-width: 800px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="..." class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Perfil</h5>
+                                        <p class="card-text">Nombre completo</p>
+                                        <p class="card-text">Cédula</p>
+                                        <p class="card-text">Correo Electrónico</p>
+                                        <p class="card-text">Teléfono</p>
+                                        <button type="button" class="btn btn-primary">Editar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-<aside>
-    <button type="button" class="btn btn-primary" onclick="window.location.href = '/categoria/listado'">
-        <i></i> Ver categorias
-    </button>
-    <button type="button" class="btn btn-primary mt-3" onclick="window.location.href = '/producto/listado'">
-        <i></i> Ver productos
-    </button>
-</aside>
+                    <main>
+                        <h2 class="text-center mt-5">PRODUCTOS FAVORITOS</h2>
+                    </main>
 
-<main>
-    <h2 class="text-center mt-5">PRODUCTOS FAVORITOS</h2>
-</main>
+                    <footer th:replace="~{layout/plantilla :: footer}"/>
 
-<footer th:replace="~{layout/plantilla :: footer}"/>
-
-</body>
-</html>
+                </body>
+                </html>
