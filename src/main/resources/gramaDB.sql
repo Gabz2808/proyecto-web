@@ -16,34 +16,39 @@ CREATE TABLE IF NOT EXISTS Producto (
     nombre VARCHAR(100),
     descripcion TEXT,
     precio DECIMAL(10, 2),
-    ruta_imagen VARCHAR(255),
+    ruta_imagen VARCHAR(1024),
     stock INT,
     activo BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (id_categoria) REFERENCES Categoria(id)
 );
 
 -- Creación de la tabla Usuario
-CREATE TABLE IF NOT EXISTS Usuario (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_completo VARCHAR(100),
-    email VARCHAR(100),
-    numero_telefono VARCHAR(20),
-	password varchar(512) NOT NULL
-);
+CREATE TABLE usuario (
+  id INT NOT NULL AUTO_INCREMENT,
+  username varchar(20) NOT NULL,
+  password varchar(512) NOT NULL,
+  nombre VARCHAR(20) NOT NULL,
+  apellidos VARCHAR(30) NOT NULL,
+  correo VARCHAR(100) NULL,
+  telefono VARCHAR(15) NULL,
+  ruta_imagen varchar(1024),
+  activo boolean,
+  PRIMARY KEY (`id`));
+
 CREATE TABLE IF NOT EXISTS Favoritos(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT,
     id_producto INT,
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     FOREIGN KEY (id_producto) REFERENCES Producto(id)
 );
 
-create table Rol (
+create table rol (
   id_rol INT NOT NULL AUTO_INCREMENT,
   nombre varchar(20),
   id_usuario int,
   PRIMARY KEY (id_rol),
-  foreign key fk_rol_usuario (id_usuario) references Usuario(id)
+  foreign key fk_rol_usuario (id_usuario) references usuario(id)
 );
 
 create table muestas_productos(
@@ -52,13 +57,15 @@ create table muestas_productos(
 	imagen2 VARCHAR(255),
 	imagen3 VARCHAR(255)
 );
-insert into usuario(nombre_completo,email,password) values
-('Gabriel Mairena', 'gabrielgranera28@hotmail.com','123');
+
+INSERT INTO usuario (id, username,password,nombre, apellidos, correo, telefono,ruta_imagen,activo) VALUES 
+(1,'gabriel','123','Gabriel', 'Mairena', 'gabrielgranera28@hotmail.com', '7777-8888', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Juan_Diego_Madrigal.jpg/250px-Juan_Diego_Madrigal.jpg',true),
+(2,'gerschacon','123','Gerson', 'Chacon', 'gerschacon@hotmail.com', '7777-8888', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Juan_Diego_Madrigal.jpg/250px-Juan_Diego_Madrigal.jpg',true);
 
 insert into rol (id_rol, nombre, id_usuario) values
- (1,'ROLE_ADMIN',1);
-
-
+ (1,'ROLE_ADMIN',1), (2,'ROLE_VENDEDOR',1), (3,'ROLE_USER',1),
+ (4,'ROLE_VENDEDOR',2), (5,'ROLE_USER',2);
+ 
 -- Creación de usuario y asignación de privilegios
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON grama.* TO 'admin'@'localhost';

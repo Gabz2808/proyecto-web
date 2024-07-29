@@ -1,31 +1,44 @@
 package com.proyecto.domain;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
-import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable {
-    private static final long serialVersionUID = 1L; //Incrementar valores en1 1
 
-    @Id //Indica el ID
+    private static final long serialVersionUID = 1L;
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long idUsuario;
-
-    private String nombreCompleto;
-    private String email;
+    
+    @NotEmpty
+    private String username;
+    @NotEmpty
     private String password;
-    private boolean esAdmin = false;
-
+    private String nombre;
+    private String apellidos;
+    private String correo;
+    private String telefono;
+    @Column(name = "ruta_imagen")
+    private String rutaImagen;
+    private boolean activo;
+    
+    @OneToMany
+    @JoinColumn(name="id")
+    private List<Rol> roles;
 
     public Usuario() {
     }
 
-    public Usuario(String nombreCompleto, boolean esAdmin) {
-        this.nombreCompleto = nombreCompleto;
-        this.esAdmin = esAdmin;
+    public Usuario(String nombre) {
+        this.nombre = nombre;
     }
+
 }

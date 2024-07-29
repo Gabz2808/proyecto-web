@@ -9,10 +9,22 @@
                 <body>
                     <header th:replace="~{layout/plantilla :: header}"/>
 
-                    <section th:replace="~{producto/fragmentos :: botonesAgregar}"/>
-                    <section th:replace="~{producto/fragmentos :: agregarProducto}"/>
-                    <section th:replace="~{producto/fragmentos :: listado}"/>
-                    
+                    <section sec:authorize="hasRole('ROLE_ADMIN')" th:replace="~{producto/fragmentos :: botonesAgregar}"/>
+                    <section sec:authorize="hasRole('ROLE_ADMIN')" th:replace="~{producto/fragmentos :: agregarProducto}"/>
+                    <section sec:authorize="hasRole('ROLE_ADMIN')" th:replace="~{producto/fragmentos :: listado}"/>
+
+                    <section sec:authorize="!hasRole('ROLE_ADMIN')" th:replace="~{layout/plantilla :: banner}" />
+                    <div sec:authorize="!hasRole('ROLE_ADMIN')" th:replace="~{layout/plantilla :: busqueda}"></div>
+
+                    <section sec:authorize="!hasRole('ROLE_ADMIN')" th:replace="~{layout/plantilla :: container}">
+                        <aside th:replace="~{layout/plantilla :: vendido}" />
+                        <div th:replace="~{layout/plantilla :: compras}" />
+                        <div th:replace="~{layout/plantilla :: description}"></div>
+
+                    </section>
+                    <div sec:authorize="!hasRole('ROLE_ADMIN')" th:replace="~{producto/fragmentos :: tarjetas}"/>                    
+
+
                     <footer th:replace="~{layout/plantilla :: footer}"/>
                 </body>
                 </html>

@@ -27,7 +27,7 @@ public class LoginController {
     @PostMapping("/register")
     public String registerSubmit(Usuario usuario, @RequestParam String email, Model modelo) {
 
-            usuario.setEsAdmin(false);
+            /*usuario.setEsAdmin(false);*/
             usuarioService.save(usuario);
             modelo.addAttribute("errorVisible", false);
             return "redirect:/login";

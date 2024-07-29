@@ -1,6 +1,7 @@
 package com.proyecto.controller;
 
 import com.proyecto.domain.Producto;
+import com.proyecto.service.CategoriaService;
 import com.proyecto.service.ProductoService;
 import com.proyecto.service.impl.FirebaseStorageServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -14,13 +15,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
+@Slf4j
+@RequestMapping("/producto")
 public class ProductoController {
+    
+    @Autowired
+    private CategoriaService categoriaService;
     
     @Autowired
     private ProductoService productoService;
 
     @GetMapping("/listado")
     public String inicio(Model model) {
+        var categorias = categoriaService.getCategorias(true);
         var productos = productoService.getProductos(false);
         model.addAttribute("productos", productos);
         model.addAttribute("totalProductos", productos.size());
@@ -58,13 +65,11 @@ public class ProductoController {
 
     @GetMapping("/modificar/{id}")
     public String productoModificar(Producto producto, Model model) {
+        var categorias = categoriaService.getCategorias(true);
         producto = productoService.getProducto(producto);
         model.addAttribute("producto", producto);
+        model.addAttribute("categorias",categorias);
         return "/producto/modifica";
     }
-    @GetMapping("/productos")
-    public String productos(Model model) {
-        model.addAttribute("productos", productoService.getProductos(true));
-        return "/productos";
-    }
+
 }
