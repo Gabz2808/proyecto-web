@@ -109,14 +109,14 @@
                                             <td>[[${categoria.nombre}]]</td>
                                             <td>[[${categoria.descripcion}]]</td>
                                             <td>
-                                                <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
+                                                <a th:href="@{/categoria/eliminar/}+${categoria.id}"
                                                    class="btn btn-outline-danger me-2"
                                                    data-bs-toggle="tooltip" 
                                                    data-bs-placement="top" 
                                                    title="Eliminar categoría">
                                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                                 </a>
-                                                <a th:href="@{/categoria/modificar/}+${categoria.idCategoria}"
+                                                <a th:href="@{/categoria/modificar/}+${categoria.id}"
                                                    class="btn btn-outline-success me-2"
                                                    data-bs-toggle="tooltip" 
                                                    data-bs-placement="top" 
@@ -153,14 +153,14 @@
                             <td>[[#{categoria.nombre}]]</td>
                             <td>[[#{categoria.descripcion}]]</td>
                             <td>
-                                <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
+                                <a th:href="@{/categoria/eliminar/}+${categoria.id}"
                                    class="btn btn-outline-danger me-2"
                                    data-bs-toggle="tooltip" 
                                    data-bs-placement="top" 
                                    title="Eliminar categoría">
                                     <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                 </a>
-                                <a th:href="@{/categoria/modificar/}+${categoria.idCategoria}"
+                                <a th:href="@{/categoria/modificar/}+${categoria.id}"
                                    class="btn btn-outline-success me-2"
                                    data-bs-toggle="tooltip" 
                                    data-bs-placement="top" 
@@ -224,11 +224,11 @@
                                   th:object="${categoria}"
                                   class="was-validated"                          
                                   enctype="multipart/form-data">
-                                <input type="hidden" name="idCategoria" th:field="*{idCategoria}"/>
+                                <input type="hidden" name="id" th:field="*{id}"/>
 
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control rounded-3" 
-                                           name="idCategoria" th:field="*{idCategoria}"
+                                           name="id" th:field="*{id}"
                                            required="true">
                                         <label for="activo">[[#{categoria.id}]]</label>
                                 </div>
@@ -272,7 +272,7 @@
                         </a>
                     </div>
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/categoria/eliminar/}+${categoria.idCategoria}" 
+                        <a th:href="@{/categoria/eliminar/}+${categoria.id}" 
                            class="btn btn-outline-danger me-2"
                            data-bs-toggle="tooltip" 
                            data-bs-placement="top" 

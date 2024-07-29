@@ -37,13 +37,13 @@ public class CategoriaController {
         return "redirect:/categoria/listado";
     }
 
-    @GetMapping("/eliminar/{idCategoria}")
+    @GetMapping("/eliminar/{id}")
     public String categoriaEliminar(Categoria categoria) {
         categoriaService.delete(categoria);
         return "redirect:/categoria/listado";
     }
 
-    @GetMapping("/modificar/{idCategoria}")
+    @GetMapping("/modificar/{id}")
     public String categoriaModificar(Categoria categoria, Model model) {
         categoria = categoriaService.getCategoria(categoria);
         model.addAttribute("categoria", categoria);

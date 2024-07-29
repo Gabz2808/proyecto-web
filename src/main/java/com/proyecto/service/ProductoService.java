@@ -19,4 +19,7 @@ public interface ProductoService {
 
     // Se elimina el producto que tiene el id pasado por parámetro / DELETE
     public void delete(Producto producto);
-}
+
+    Producto getProductoById(Long id);
+
+    List<Producto> getRelacionados(Long id);}

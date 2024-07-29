@@ -30,7 +30,7 @@ public class ProjectConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();
-        slr.setDefaultLocale(Locale.getDefault());
+        slr.setDefaultLocale(new Locale("es"));
         slr.setLocaleAttributeName("session.current.locale");
         slr.setTimeZoneAttributeName("session.current.timezone");
         return slr;
@@ -65,41 +65,40 @@ public class ProjectConfig implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/errores/**",
-                        "/carrito/**", "/pruebas/**", "/reportes/**",
-                        "/servicios/**", "/producto/listado/**", "/nosotros/**",
-                        "/registro/**", "/js/**", "/webjars/**"
-                )
-                .permitAll()
-                .requestMatchers(
-                        "/producto/nuevo", "/producto/guardar",
-                        "/producto/modificar/**", "/producto/eliminar/**",
-                        "/categoria/listado/**",
-                        "/categoria/nuevo", "/categoria/guardar",
-                        "/categoria/modificar/**", "/categoria/eliminar/**"
-                ).hasRole("ADMIN")
-                .requestMatchers(
-                        "/usuario/listado"
-                ).hasAnyRole("ADMIN", "VENDEDOR")
-                .requestMatchers(
-                        "/facturar/carrito"
-                ).hasRole("USER")
+                        .requestMatchers("/", "/index", "/errores/**",
+                                "/carrito/**", "/pruebas/**", "/reportes/**",
+                                "/servicios/**", "/producto/listado/**", "/nosotros/**",
+                                "/registro/**", "/js/**", "/webjars/**", "/catalogo/**", "/register", "/login"
+                        ).permitAll()
+                        .requestMatchers(
+                                "/producto/nuevo", "/producto/guardar",
+                                "/producto/modificar/**", "/producto/eliminar/**",
+                                "/categoria/listado/**",
+                                "/categoria/nuevo", "/categoria/guardar",
+                                "/categoria/modificar/**", "/categoria/eliminar/**"
+                        ).hasRole("ADMIN")
+                        .requestMatchers(
+                                "/usuario/listado"
+                        ).hasAnyRole("ADMIN", "VENDEDOR")
+                        .requestMatchers(
+                                "/facturar/carrito"
+                        ).hasRole("USER")
                 )
                 .formLogin((form) -> form
-                .loginPage("/login")
-                .defaultSuccessUrl("/index", true)
-                .permitAll()
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/index", true)
+                        .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());
         return http.build();
     }
 
-    /* El siguiente método se utiliza para completar la clase no es 
+
+    /* El siguiente método se utiliza para completar la clase no es
     realmente funcional, la próxima semana se reemplaza con usuarios de BD */
     @Bean
     public UserDetailsService users() {
