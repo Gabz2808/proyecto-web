@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Grama</title>
+    </head>
+    <body>
+            <!-- Registrar un nuevo usuario -->
+            <div class="row justify-content-center" th:fragment="nuevoUsuario">
+        <div class="container my-5 row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card rounded-4 shadow">
+                        <div class="p-5 pb-4 border-bottom-0">
+                            <h1 class="fw-bold mb-0 fs-2">[[#{usuario.agregar}]]</h1>
+                        </div>
+                        <div class="card-body p-5 pt-0">
+                            <form method="POST" th:action="@{/registro/crearUsuario}" th:object="${usuario}" class="was-validated">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-3" name="username" th:field="*{username}" placeholder="Username" required="true">
+                                    <label for="username">[[#{usuario.username}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-3" name="nombre" th:field="*{nombre}" placeholder="Nombre" required="true">
+                                    <label for="nombre">[[#{usuario.nombre}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-3" name="apellidos" th:field="*{apellidos}" placeholder="Apellidos" required="true">
+                                    <label for="apellidos">[[#{usuario.apellidos}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control rounded-3" name="correo" th:field="*{correo}" placeholder="Correo" required="true">
+                                    <label for="correo">[[#{usuario.correo}]]</label>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a th:href="@{/login}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]</a>
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-envelope"></i> [[#{usuario.activacion}]]</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            </div>
+
+            <!-- Activar un usuario -->
+            <div class="row justify-content-center" th:fragment="activarUsuario">
+        <div class="container my-5 row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card rounded-4 shadow">
+                        <div class="p-5 pb-4 border-bottom-0">
+                            <h1 class="fw-bold mb-0 fs-2">[[#{registro.activar}]]</h1>
+                        </div>
+                        <div class="card-body p-5 pt-0">
+                            <form method="POST" th:action="@{/registro/activar}" th:object="${usuario}" class="was-validated" enctype="multipart/form-data">
+                                <input type="hidden" name="idUsuario" th:field="*{idUsuario}">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-3" name="username" th:field="*{username}" placeholder="Username" required="true">
+                                    <label for="username">[[#{usuario.username}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-3" name="nombre" th:field="*{nombre}" placeholder="Nombre" required="true">
+                                    <label for="nombre">[[#{usuario.nombre}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-3" name="apellidos" th:field="*{apellidos}" placeholder="Apellidos" required="true">
+                                    <label for="apellidos">[[#{usuario.apellidos}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control rounded-3" name="correo" th:field="*{correo}" placeholder="Correo" required="true">
+                                    <label for="correo">[[#{usuario.correo}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="tel" class="form-control rounded-3" name="telefono" th:field="*{telefono}" placeholder="Teléfono">
+                                    <label for="telefono">[[#{usuario.telefono}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control rounded-3" name="password" th:field="*{password}" placeholder="Password">
+                                    <label for="password">[[#{usuario.password}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input class="form-control" type="file" name="imagenFile" onchange="readURL(this);">
+                                    <label for="imagen">[[#{usuario.imagen}]]</label>
+                                    <img id="blah" th:src="@{${usuario.rutaImagen}}" alt="your image" height="200">
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a th:href="@{/login}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]</a>
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> [[#{usuario.activacion}]]</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            </div>
+
+            <!-- Recordar un usuario -->
+            <div class="row justify-content-center" th:fragment="recordarUsuario">
+                        <div class="container my-5 row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card rounded-4 shadow">
+                        <div class="p-5 pb-4 border-bottom-0">
+                            <h1 class="fw-bold mb-0 fs-2">[[#{registro.recordar.us}]]</h1>
+                        </div>
+                        <div class="card-body p-5 pt-0">
+                            <form method="POST" th:action="@{/registro/recordarUsuario}" th:object="${usuario}" class="was-validated">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control rounded-3" name="username" th:field="*{username}" placeholder="Username">
+                                    <label for="username">[[#{usuario.username}]]</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control rounded-3" name="correo" th:field="*{correo}" placeholder="Correo">
+                                    <label for="correo">[[#{usuario.correo}]]</label>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a th:href="@{/login}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]</a>
+                                    <button type="submit" class="btn btn-success"><i class="fas fa-address-card"></i> [[#{registro.recordar.us}]]</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

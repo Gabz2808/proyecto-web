@@ -28,7 +28,7 @@ public class LoginController {
     public String registerSubmit(Usuario usuario, @RequestParam String email, Model modelo) {
 
             /*usuario.setEsAdmin(false);*/
-            usuarioService.save(usuario);
+            /*usuarioService.save(usuario);*/
             modelo.addAttribute("errorVisible", false);
             return "redirect:/login";
 

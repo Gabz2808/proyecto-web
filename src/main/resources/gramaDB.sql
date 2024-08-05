@@ -16,50 +16,60 @@ CREATE TABLE IF NOT EXISTS Producto (
     nombre VARCHAR(100),
     descripcion TEXT,
     precio DECIMAL(10, 2),
-    ruta_imagen VARCHAR(1024) DEFAULT 'https://via.placeholder.com/200x200',
+    ruta_imagen VARCHAR(1024),
     stock INT,
     activo BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (id_categoria) REFERENCES Categoria(id)
 );
+
 -- Creación de la tabla Usuario
-CREATE TABLE IF NOT EXISTS Usuario (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_completo VARCHAR(100),
-    email VARCHAR(100),
-    numero_telefono VARCHAR(20),
-	password varchar(512) NOT NULL
-);
-CREATE TABLE IF NOT EXISTS Favoritos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE usuario (
+  id INT NOT NULL AUTO_INCREMENT,
+  username varchar(20) NOT NULL,
+  password varchar(512) NOT NULL,
+  nombre VARCHAR(20) NOT NULL,
+  apellidos VARCHAR(30) NOT NULL,
+  correo VARCHAR(50) NULL,
+  telefono VARCHAR(15) NULL,
+  ruta_imagen varchar(1024),
+  activo boolean,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE IF NOT EXISTS Favoritos(
+	id INT PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT,
     id_producto INT,
-    fecha_adicion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (id_producto) REFERENCES Producto(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    UNIQUE (id_usuario, id_producto)
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    FOREIGN KEY (id_producto) REFERENCES Producto(id)
 );
 
-create table Rol (
+create table rol (
   id_rol INT NOT NULL AUTO_INCREMENT,
   nombre varchar(20),
   id_usuario int,
   PRIMARY KEY (id_rol),
-  foreign key fk_rol_usuario (id_usuario) references Usuario(id)
+  foreign key fk_rol_usuario (id_usuario) references usuario(id)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+create table muestas_productos(
+	id_producto int,
+    imagen1 VARCHAR(255),
+	imagen2 VARCHAR(255),
+	imagen3 VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS muestras_productos (
-    id_producto INT,
-    imagen1 VARCHAR(255),
-    imagen2 VARCHAR(255),
-    FOREIGN KEY (id_producto) REFERENCES Producto(id)
-);
-insert into usuario(nombre_completo,email,password) values
-('Gabriel Mairena', 'gabrielgranera28@hotmail.com','123');
+-- password 1 = 123
+-- password 2 = 456
+INSERT INTO usuario (id, username,password,nombre, apellidos, correo, telefono,ruta_imagen,activo) VALUES 
+(1,'gerschacon','$2a$10$P1.w58XvnaYQUQgZUCk4aO/RTRl8EValluCqB3S2VMLTbRt.tlre.','Gerson', 'Chacon', 'gerschacon@hotmail.com', '7777-8888', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Juan_Diego_Madrigal.jpg/250px-Juan_Diego_Madrigal.jpg',true),
+(2,'gabriel','$2a$10$GkEj.ZzmQa/aEfDmtLIh3udIH5fMphx/35d0EYeqZL5uzgCJ0lQRi','Gabriel', 'Mairena', 'gabrielgranera28@hotmail.com', '7777-8888', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Juan_Diego_Madrigal.jpg/250px-Juan_Diego_Madrigal.jpg',true);
 
 insert into rol (id_rol, nombre, id_usuario) values
- (1,'ROLE_ADMIN',1);
-
-
+ (1,'ROLE_ADMIN',1), (2,'ROLE_VENDEDOR',1), (3,'ROLE_USER',1),
+ (4,'ROLE_VENDEDOR',2), (5,'ROLE_USER',2);
+ 
 -- Creación de usuario y asignación de privilegios
 CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON grama.* TO 'admin'@'localhost';
@@ -71,43 +81,10 @@ INSERT INTO Categoria (nombre, descripcion) VALUES ('Computadoras', 'Computadora
 INSERT INTO Categoria (nombre, descripcion) VALUES ('Telefonía', 'Teléfonos móviles y accesorios');
 
 -- Insertar productos de ejemplo
-use grama;
--- Insertar 10 productos tecnológicos en la tabla Producto
-INSERT INTO Producto (id_categoria, nombre, descripcion, precio, stock)
-VALUES
-(2, 'Laptop ASUS', 'Laptop ASUS con procesador Intel i7', 899.99, 50),
-(3, 'Smartphone Samsung Galaxy', 'Smartphone Samsung Galaxy con pantalla AMOLED', 499.99, 100),
-(3, 'Tablet Apple iPad', 'Apple iPad con pantalla Retina', 329.99, 30),
-(1, 'Monitor Dell', 'Monitor Dell de 24 pulgadas Full HD', 149.99, 25),
-(1, 'Auriculares Bose', 'Auriculares inalámbricos Bose con cancelación de ruido', 299.99, 40),
-(3, 'Smartwatch Garmin', 'Smartwatch Garmin con GPS integrado', 199.99, 60),
-(1, 'Teclado Mecánico Logitech', 'Teclado mecánico Logitech retroiluminado', 99.99, 70),
-(2, 'Mouse Gaming Razer', 'Mouse gaming Razer con sensor óptico', 59.99, 80),
-(1, 'Cámara Digital Canon', 'Cámara digital Canon con lente de 18-55mm', 449.99, 20),
-(1, 'Impresora HP', 'Impresora HP multifuncional', 129.99, 35);
+INSERT INTO Producto (id_categoria, nombre, descripcion, precio, ruta_imagen, stock) 
+VALUES (1, 'Smartphone XYZ', 'Smartphone de última generación con pantalla OLED', 699.99, 'https://www.adslzone.net/app/uploads-adslzone.net/2023/09/Samsung-Galaxy-S24-filtracion.jpg', 30);
 
--- Crear Trigger
-DROP TRIGGER IF EXISTS after_insert_producto;
+INSERT INTO Producto (id_categoria, nombre, descripcion, precio, ruta_imagen, stock) 
+VALUES (2, 'Laptop ABC', 'Laptop ultraligera con 16GB de RAM y 512GB SSD', 1199.99, 'https://miro.medium.com/v2/resize:fit:1400/0*lFtXGZ5aY4ckM0pq.jpg', 20);
 
-DELIMITER //
-
-CREATE TRIGGER after_insert_producto
-AFTER INSERT ON Producto
-FOR EACH ROW
-BEGIN
-    INSERT INTO muestras_productos (id_producto, imagen1, imagen2)
-    VALUES (NEW.id, 'https://via.placeholder.com/200x200', 'https://via.placeholder.com/200x200');
-END //
-
-DELIMITER ;
-
-
--- Paso 1: Eliminar filas de la tabla muestras_productos
--- DELETE FROM muestras_productos WHERE id_producto IN (SELECT id FROM Producto);
-
--- Paso 2: Eliminar filas de la tabla Producto
--- DELETE FROM Producto;
-
--- Paso 3: (Opcional) Restablecer el contador de AUTO_INCREMENT en la tabla Producto
--- ALTER TABLE Producto AUTO_INCREMENT = 1;
 

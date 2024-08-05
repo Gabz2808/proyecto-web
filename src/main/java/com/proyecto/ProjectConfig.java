@@ -99,26 +99,36 @@ public class ProjectConfig implements WebMvcConfigurer {
     }
 
 
-    /* El siguiente método se utiliza para completar la clase no es
-    realmente funcional, la próxima semana se reemplaza con usuarios de BD */
-    @Bean
-    public UserDetailsService users() {
-        UserDetails admin = User.builder()
-                .username("gerson")
-                .password("{noop}123")
-                .roles("ADMIN")
-                .build();
-        UserDetails sales = User.builder()
-                .username("gabriel")
-                .password("{noop}456")
-                .roles("VENDEDOR")
-                .build();
-        UserDetails user = User.builder()
-                .username("diego")
-                .password("{noop}789")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(user, sales, admin);
+    /* El siguiente método se utiliza para completar la clase no es 
+    realmente funcional, la próxima semana se reemplaza con usuarios de BD */    
+//    @Bean
+//    public UserDetailsService users() {
+//        UserDetails admin = User.builder()
+//                .username("juan")
+//                .password("{noop}123")
+//                .roles("USER", "VENDEDOR", "ADMIN")
+//                .build();
+//        UserDetails sales = User.builder()
+//                .username("rebeca")
+//                .password("{noop}456")
+//                .roles("USER", "VENDEDOR")
+//                .build();
+//        UserDetails user = User.builder()
+//                .username("pedro")
+//                .password("{noop}789")
+//                .roles("USER")
+//                .build();
+//        return new InMemoryUserDetailsManager(user, sales, admin);
+//    }
+    
+    @Autowired
+   private UserDetailsService userDetailsService;
+    
+    @Autowired
+    public void configurerGlobal(AuthenticationManagerBuilder build)
+            throws Exception {
+        build
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
-  
 }

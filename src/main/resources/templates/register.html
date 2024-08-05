@@ -27,48 +27,55 @@
                     </style>
 
                     <header th:replace="~{layout/plantilla :: header}"/>
-
-
                     <div th:if="${errorVisible}" class="alert alert-danger" role="alert">
                         Ocurrió un error al procesar su solicitud.
                     </div>
-
                     <!-- Sección que muestra cuadro para poder registrar un usuario-->    
-                    <div class="container mb-5">
+                    <div class="container">
                         <div class="row justify-content-center mt-5">
                             <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center mb-4"><Strong>Registrarse</Strong></h5>
-                                        <form action="#" th:action="@{/register}" method="post" class="needs-validation" novalidate>
-
-                                            <div class="mb-3">
-                                                <label for="inputName" class="form-label"><Strong>Nombre completo</Strong></label>
-                                                <input type="text" class="form-control" id="inputName" name="nombreCompleto" placeholder="Nombre completo" required>
+                                <div class="card rounded-4 shadow">
+                                    <div class="p-5 pb-4 border-bottom-0">
+                                        <h1 class="fw-bold mb-0 fs-2 text-center">Registrarse</h1>
+                                    </div>
+                                    <div class="card-body p-5 pt-0">
+                                        <form action="#" th:action="@{/register}" method="post" class="needs-validation was-validated" novalidate>
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control rounded-3" id="nombre" name="nombre" placeholder="Nombre" required>
+                                                    <label for="nombre"><i class="fas fa-user"></i> Nombre</label>
                                                     <div class="invalid-feedback">
-                                                        Por favor ingresa tu nombre completo.
+                                                        Por favor ingresa tu nombre.
                                                     </div>
                                             </div>
 
-                                            <div class="mb-3">
-                                                <label for="inputEmail" class="form-label"><Strong>Email</Strong></label>
-                                                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Ingrese su email" required>
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control rounded-3" id="apellido" name="apellido" placeholder="Apellido" required>
+                                                    <label for="apellido"><i class="fas fa-user"></i> Apellido</label>
+                                                    <div class="invalid-feedback">
+                                                        Por favor ingresa tu apellido.
+                                                    </div>
+                                            </div>                                            
+                                            
+
+                                            <div class="form-floating mb-3">
+                                                <input type="email" class="form-control rounded-3" id="inputEmail" name="email" placeholder="Ingrese su email" required>
+                                                    <label for="inputEmail"><i class="fas fa-envelope"></i> Email</label>
                                                     <div class="invalid-feedback">
                                                         Por favor ingresa un correo válido.
                                                     </div>
                                             </div>
 
-                                            <div class="mb-3">
-                                                <label for="inputPassword" class="form-label"><Strong>Contraseña</Strong></label>
-                                                <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Contraseña" required>
+                                            <div class="form-floating mb-3">
+                                                <input type="password" class="form-control rounded-3" id="inputPassword" name="password" placeholder="Contraseña" required>
+                                                    <label for="inputPassword"><i class="fas fa-key"></i> Contraseña</label>
                                                     <div class="invalid-feedback">
                                                         Por favor ingresa tu contraseña.
                                                     </div>
                                             </div>
 
-                                            <div class="mb-3">
-                                                <label for="confirmPassword" class="form-label"><Strong>Confirmar contraseña</Strong></label>
-                                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña" required>
+                                            <div class="form-floating mb-3">
+                                                <input type="password" class="form-control rounded-3" id="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña" required>
+                                                    <label for="confirmPassword"><i class="fas fa-key"></i> Confirmar contraseña</label>
                                                     <div class="invalid-feedback">
                                                         Por favor confirma tu contraseña.
                                                     </div>
@@ -82,13 +89,19 @@
                                                     </div>
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary"><Strong>Registrarse</Strong></button>
+                                            <div class="d-flex justify-content-between">
+                                                <button type="submit" class="btn btn-primary"><i class="fas fa-user-plus"></i> Registrarse</button>
+                                            </div>
                                         </form>
+                                    </div>
+                                    <div th:if="${param.error != null}" class="p-5 pt-0">
+                                        <h3 class="text-danger">Error en el registro</h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="container mt-5"></div>
 
 
                     <footer th:replace="~{layout/plantilla :: footer}"/>
