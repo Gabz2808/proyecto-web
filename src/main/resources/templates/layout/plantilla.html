@@ -161,18 +161,8 @@
                     flex-direction: column;
                 }
 
-                .left {
-                    height: 100vh;
-                    width: 25%;
-                }
 
-                ._right {
-                    height: 100vh;
-                    width: 25%;
-                    gap: 10px;
-                    display: flex;
-                    flex-direction: column;
-                }
+
 
                 ._container {
                     display: flex;
@@ -208,9 +198,61 @@
                     margin-top: 10px;
                 }
 
-                .right_list {
-                    height: 30%;
+
+                /* From Uiverse.io by alexmaracinaru */
+
+                /* Inicio del boton comprar */
+                .cta {
+                    border: none;
+                    background: none;
+                    cursor: pointer;
                 }
+
+                .cta span {
+                    padding-bottom: 7px;
+                    letter-spacing: 4px;
+                    font-size: 14px;
+                    padding-right: 15px;
+                    text-transform: uppercase;
+                }
+
+                .cta svg {
+                    transform: translateX(-8px);
+                    transition: all 0.3s ease;
+                }
+
+                .cta:hover svg {
+                    transform: translateX(0);
+                }
+
+                .cta:active svg {
+                    transform: scale(0.9);
+                }
+
+                .hover-underline-animation {
+                    position: relative;
+                    color: black;
+                    padding-bottom: 20px;
+                }
+
+                .hover-underline-animation:after {
+                    content: "";
+                    position: absolute;
+                    width: 100%;
+                    transform: scaleX(0);
+                    height: 2px;
+                    bottom: 0;
+                    left: 0;
+                    background-color: #000000;
+                    transform-origin: bottom right;
+                    transition: transform 0.25s ease-out;
+                }
+
+                .cta:hover .hover-underline-animation:after {
+                    transform: scaleX(1);
+                    transform-origin: bottom left;
+                }
+                /* Fin del boton comprar */
 
 
             </style>
@@ -218,6 +260,33 @@
     </head>
     <body>
 
+    <div th:fragment="compras" class="mb-3" style="text-align: center; margin-top: 20px;">
+        <div >
+            <h2>Lista de compras</h2>
+            <ul class="compras" style="padding: 0; margin: 0;">
+                <li>Producto 1</li>
+                <li>Producto 2</li>
+                <li>Producto 3</li>
+            </ul>
+            <button class="cta">
+                <span class="hover-underline-animation"> Ir al carrito </span>
+                <svg
+                        id="arrow-horizontal"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="30"
+                        height="10"
+                        viewBox="0 0 46 16"
+                >
+                    <path
+                            id="Path_10"
+                            data-name="Path 10"
+                            d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
+                            transform="translate(30)"
+                    ></path>
+                </svg>
+            </button>
+        </div>
+    </div>
 
 
         <div  th:fragment="busqueda" class="center mt-1">
@@ -272,37 +341,24 @@
             </div>
         </header>
 
+    <div class="description" th:fragment="description">
+        <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/discount%20grama.png?alt=media&token=37776829-b0a2-4587-9aab-21cb190aa43d" alt="Descripcion" class="_descripcion"/>
+    </div>
 
-        <img th:fragment="banner" src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/Bienvenido%20Grama.png?alt=media&token=b1b3a721-3689-4aec-b15d-27490ebf1fbb" alt="Banner" class="banner" />
-        <div th:fragment="container" class="_container" style="margin-left: 20px; margin-top: 50px;">
-            <div th:fragment="vendido" class="left">
-                <h2>Producto más vendido</h2>
-                <div class="producto">
-                    <img src="ruta/a/la/imagen-del-producto.jpg" alt="Producto más vendido">
-                        <h3>Nombre del Producto</h3>
-                        <p>Descripción breve del producto más vendido.</p>
-                        <p><strong>Precio:</strong> $XX.XX</p>
-                        <a href="enlace-al-producto">Ver más</a>
-                </div>
-            </div>
-            <div class="description" th:fragment="description">
-                <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/discount%20grama.png?alt=media&token=37776829-b0a2-4587-9aab-21cb190aa43d" alt="Descripcion" class="_descripcion"/>
-            </div>
-            <div th:fragment="compras" class="_right mb-3" style="text-align: center; margin-top: 20px;">
-                <div class="right_list">
-                    <h2>Lista de compras</h2>
-                    <ul class="compras" style="padding: 0; margin: 0;">
-                        <li>Producto 1</li>
-                        <li>Producto 2</li>
-                        <li>Producto 3</li>
-                    </ul>
-                    <button type="button" class="btn btn-outline-primary me-2 mb-3">
-                        <i></i> Comprar
-                    </button>
-                </div>
-            </div>
+    <div th:fragment="recomendado">
+        <h2>Producto Recomendado</h2>
+        <div class="producto">
+            <img src="ruta/a/la/imagen-del-producto.jpg" alt="Producto más recomendado">
+            <h3>Nombre del Producto</h3>
+            <p>Descripción breve del producto más recomendado.</p>
+            <p><strong>Precio:</strong> $XX.XX</p>
+            <a href="enlace-al-producto">Ver más</a>
+        </div>
+
+
 
         </div>
+    <img th:fragment="banner" src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/Bienvenido%20Grama.png?alt=media&token=b1b3a721-3689-4aec-b15d-27490ebf1fbb" alt="Banner" class="banner" />
 
         <footer th:fragment="footer" style="text-align: center; padding: 1rem;">
             <div>

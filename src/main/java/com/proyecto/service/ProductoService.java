@@ -22,4 +22,7 @@ public interface ProductoService {
 
     Producto getProductoById(Long id);
 
-    List<Producto> getRelacionados(Long id);}
+    List<Producto> getRelacionados(Long id);
+
+    List<Producto> getRandom();
+}

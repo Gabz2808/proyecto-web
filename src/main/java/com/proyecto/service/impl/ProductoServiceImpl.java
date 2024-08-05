@@ -53,4 +53,10 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> getRelacionados(Long id) {
         return productoDao.findTop5ByCategoriaId(id);
     }
+
+    @Override
+    @Transactional
+    public List<Producto> getRandom(){
+        return productoDao.random();
+    }
 }

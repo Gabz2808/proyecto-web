@@ -17,7 +17,7 @@
                     <div sec:authorize="!hasRole('ROLE_ADMIN')" th:replace="~{layout/plantilla :: busqueda}"></div>
 
                     <section sec:authorize="!hasRole('ROLE_ADMIN')" th:replace="~{layout/plantilla :: container}">
-                        <aside th:replace="~{layout/plantilla :: vendido}" />
+                        <aside th:replace="~{layout/plantilla :: recomendado}" />
                         <div th:replace="~{layout/plantilla :: compras}" />
                         <div th:replace="~{layout/plantilla :: description}"></div>
 

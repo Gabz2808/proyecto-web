@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-<head th:replace="~{layout/plantilla :: head}">
-    <title>TODO supply a title</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
+<head th:replace="~{layout/plantilla :: head}"/>
+<style th:replace="~{producto/fragmentos :: style}"/>
 <body>
 <section th:replace="~{categoria/fragmentos :: iniciarSesion}" />
 
@@ -12,12 +9,10 @@
 <section th:replace="~{layout/plantilla :: banner}" />
 <div th:replace="~{layout/plantilla :: busqueda}"></div>
 
-<section th:replace="~{layout/plantilla :: container}">
-    <aside th:replace="~{layout/plantilla :: vendido}" />
+    <aside th:replace="~{layout/plantilla :: recomendado}" />
     <div th:replace="~{layout/plantilla :: compras}" />
     <div th:replace="~{layout/plantilla :: description}"></div>
 
-</section>
 <div th:replace="~{producto/fragmentos :: tarjetas}"/>
 
 <footer th:replace="~{layout/plantilla :: footer}" />

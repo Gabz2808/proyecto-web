@@ -84,7 +84,34 @@ INSERT INTO Categoria (nombre, descripcion) VALUES ('Telefonía', 'Teléfonos m�
 INSERT INTO Producto (id_categoria, nombre, descripcion, precio, ruta_imagen, stock) 
 VALUES (1, 'Smartphone XYZ', 'Smartphone de última generación con pantalla OLED', 699.99, 'https://www.adslzone.net/app/uploads-adslzone.net/2023/09/Samsung-Galaxy-S24-filtracion.jpg', 30);
 
-INSERT INTO Producto (id_categoria, nombre, descripcion, precio, ruta_imagen, stock) 
-VALUES (2, 'Laptop ABC', 'Laptop ultraligera con 16GB de RAM y 512GB SSD', 1199.99, 'https://miro.medium.com/v2/resize:fit:1400/0*lFtXGZ5aY4ckM0pq.jpg', 20);
+-- Crear Trigger
+DROP TRIGGER IF EXISTS after_insert_producto;
+
+DELIMITER //
+
+create view v_favoritos_productos as
+select F.id
+	,u.id as id_usuario
+    ,p.id as id_producto
+	,P.id_categoria
+    ,P.nombre
+    ,P.descripcion
+    ,P.precio
+    ,P.ruta_imagen
+    ,P.activo
+    ,F.fecha_adicion
+from favoritos F
+left join usuario U on U.id = F.id_usuario
+left join producto P on P.id = F.id_producto;
+
+CREATE TRIGGER after_insert_producto
+AFTER INSERT ON Producto
+FOR EACH ROW
+BEGIN
+    INSERT INTO muestras_productos (id_producto, imagen1, imagen2)
+    VALUES (NEW.id, 'https://via.placeholder.com/200x200', 'https://via.placeholder.com/200x200');
+END //
+
+DELIMITER ;
 
 
