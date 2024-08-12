@@ -21,23 +21,25 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/producto")
 public class ProductoController {
-    
+
     @Autowired
     private ProductoService productoService;
 
     @Autowired
     private CategoriaService categoriaService;
 
+@GetMapping("/listado")
+public String inicio(Model model) {
+    var categorias = categoriaService.getCategorias(true);
+    var productos = productoService.getProductos(false);
+    Producto productoRecomendado = productoService.getProductoRecomendado(); // Obtener producto recomendado
+    model.addAttribute("categorias", categorias);
+    model.addAttribute("productos", productos);
+    model.addAttribute("productoRecomendado", productoRecomendado); // Agregar al modelo
+    model.addAttribute("totalProductos", productos.size());
+    return "/producto/listado";
+}
 
-    @GetMapping("/listado")
-    public String inicio(Model model) {
-        var categorias = categoriaService.getCategorias(true);
-        var productos = productoService.getProductos(false);
-        model.addAttribute("categorias", categorias);
-        model.addAttribute("productos", productos);
-        model.addAttribute("totalProductos", productos.size());
-        return "/producto/listado";
-    }
 
     @GetMapping("/nuevo")
     public String productoNuevo(Producto producto) {
@@ -46,7 +48,7 @@ public class ProductoController {
 
     @Autowired
     private FirebaseStorageServiceImpl firebaseStorageService;
-    
+
     @PostMapping("/guardar")
     public String productoGuardar(Producto producto,
             @RequestParam("imagenFile") MultipartFile imagenFile) {
@@ -54,8 +56,8 @@ public class ProductoController {
             productoService.save(producto);
             producto.setRutaImagen(
                     firebaseStorageService.cargaImagen(
-                            imagenFile, 
-                            "producto", 
+                            imagenFile,
+                            "producto",
                             producto.getId()));
         }
         productoService.save(producto);

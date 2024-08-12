@@ -260,33 +260,33 @@
     </head>
     <body>
 
-    <div th:fragment="compras" class="mb-3" style="text-align: center; margin-top: 20px;">
-        <div >
-            <h2>Lista de compras</h2>
-            <ul class="compras" style="padding: 0; margin: 0;">
-                <li>Producto 1</li>
-                <li>Producto 2</li>
-                <li>Producto 3</li>
-            </ul>
-            <button class="cta">
-                <span class="hover-underline-animation"> Ir al carrito </span>
-                <svg
+        <div th:fragment="compras" class="mb-3" style="text-align: right;">
+            <div >
+                <h2>Lista de compras</h2>
+                <ul class="compras" style="padding: 0; margin: 0;">
+                    <li>Producto 1</li>
+                    <li>Producto 2</li>
+                    <li>Producto 3</li>
+                </ul>
+                <button class="cta">
+                    <span class="hover-underline-animation"> Ir al carrito </span>
+                    <svg
                         id="arrow-horizontal"
                         xmlns="http://www.w3.org/2000/svg"
                         width="30"
                         height="10"
                         viewBox="0 0 46 16"
-                >
-                    <path
+                        >
+                        <path
                             id="Path_10"
                             data-name="Path 10"
                             d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
                             transform="translate(30)"
-                    ></path>
-                </svg>
-            </button>
+                            ></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-    </div>
 
 
         <div  th:fragment="busqueda" class="center mt-1">
@@ -341,24 +341,39 @@
             </div>
         </header>
 
-    <div class="description" th:fragment="description">
-        <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/discount%20grama.png?alt=media&token=37776829-b0a2-4587-9aab-21cb190aa43d" alt="Descripcion" class="_descripcion"/>
-    </div>
+        <div class="description" th:fragment="description">
+            <img src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/discount%20grama.png?alt=media&token=37776829-b0a2-4587-9aab-21cb190aa43d" alt="Descripcion" class="_descripcion"/>
+        </div>
 
-    <div th:fragment="recomendado">
-        <h2>Producto Recomendado</h2>
-        <div class="producto">
-            <img src="ruta/a/la/imagen-del-producto.jpg" alt="Producto más recomendado">
-            <h3>Nombre del Producto</h3>
-            <p>Descripción breve del producto más recomendado.</p>
-            <p><strong>Precio:</strong> $XX.XX</p>
-            <a href="enlace-al-producto">Ver más</a>
+
+        <div th:fragment="recomendado" class="container mb-3 mt-3">
+            <div th:if="${productoRecomendado != null}" class="card">
+                <label class="ui-bookmark">
+                    <input type="checkbox">
+                        <div class="bookmark">
+                            <svg viewBox="0 0 32 32">
+                                <g>
+                                    <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                </label>
+                <img th:src="@{${productoRecomendado.rutaImagen}}" alt="Imagen del producto recomendado">
+                    <div class="content">
+                        <h1 th:text="${productoRecomendado.nombre}"></h1>
+                        <p th:text="${productoRecomendado.descripcion}"></p>
+                        <p th:text="'Precio: $' + ${productoRecomendado.precio}"></p>
+                    </div>
+            </div>
+            <div th:unless="${productoRecomendado != null}">
+                <p>No hay productos recomendados en este momento.</p>
+            </div>
         </div>
 
 
 
         </div>
-    <img th:fragment="banner" src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/Bienvenido%20Grama.png?alt=media&token=b1b3a721-3689-4aec-b15d-27490ebf1fbb" alt="Banner" class="banner" />
+        <img th:fragment="banner" src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/Bienvenido%20Grama.png?alt=media&token=b1b3a721-3689-4aec-b15d-27490ebf1fbb" alt="Banner" class="banner" />
 
         <footer th:fragment="footer" style="text-align: center; padding: 1rem;">
             <div>
