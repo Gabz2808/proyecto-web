@@ -2,6 +2,7 @@ package com.proyecto.service;
 
 import com.proyecto.domain.Usuario;
 import java.util.List;
+import java.util.Optional;
 
 public interface UsuarioService {
 
@@ -10,6 +11,8 @@ public interface UsuarioService {
 
     // Se obtiene un Usuario, a partir del id de un usuario
     public Usuario getUsuario(Usuario usuario);
+
+   Usuario getUsuarioPorId(Long id);
 
     // Se obtiene un Usuario, a partir del username de un usuario
     public Usuario getUsuarioPorUsername(String username);

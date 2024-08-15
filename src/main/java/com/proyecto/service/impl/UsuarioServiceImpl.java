@@ -6,6 +6,8 @@ import com.proyecto.domain.Rol;
 import com.proyecto.domain.Usuario;
 import com.proyecto.service.UsuarioService;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,5 +71,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     public void delete(Usuario usuario) {
         usuarioDao.delete(usuario);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Usuario getUsuarioPorId(Long idUsuario) {
+        return usuarioDao.findById(idUsuario).orElse(null);
     }
 }

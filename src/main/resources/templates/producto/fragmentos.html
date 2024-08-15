@@ -15,29 +15,48 @@
             justify-content: center;
         }
 
-        .card {
-            position: relative; /* Necesario para posicionar el icono */
-            flex: 0 0 190px;
-            height: 500px;
-            width: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
-        }
 
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 8px, rgba(0, 0, 0, 0.5) 0px 14px 26px -3px, rgba(0, 0, 0, 0.4) 0px -6px 0px inset;
-            filter: brightness(0.7); /* Oscurece la tarjeta */
+        .card {
+            position: relative;
+            width: 100%;
+            max-width: 220px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
 
         .card img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .bookmark {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .content h1 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            font-size: 1rem;
+            color: #666;
         }
 
         .card:hover .ui-bookmark {
@@ -61,6 +80,7 @@
             z-index: 1; /* Asegura que el icono esté por encima de la imagen */
             opacity: 0; /* Oculta el icono por defecto */
             transition: opacity 0.3s; /* Transición suave para el icono */
+            padding: 5px;
         }
 
         .ui-bookmark svg {
@@ -259,48 +279,9 @@
         /* Fin icono guardar */
 
 
-        /* Ver el nombre al pasar el cursor*/
-        .content {
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            position: absolute;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            opacity: 0;
-            transition: 0.6s;
 
-        }
 
-        .content:hover {
-            opacity: 1;
-        }
 
-        .content h1 {
-            font-size: 45px;
-            color: gray;
-            margin-bottom: 15px;
-        }
-
-        .content p {
-            font-size: 19px;
-            color: gray;
-        }
-
-        .content > * {
-            transform: translateY(25px);
-            transition: transform 0.6s;
-
-        }
-
-        .content:hover > * {
-            transform: translateY(0px);
-
-        }
     </style>
 </head>
 <body>
@@ -321,22 +302,27 @@
     </div>
 </section>
 
+<!-- Plantilla HTML con Bootstrap -->
 <div th:fragment="tarjetas" class="container mb-3 mt-3">
-    <div th:each="producto : ${productos}" class="card">
-        <label class="ui-bookmark">
-            <input type="checkbox">
-            <div class="bookmark">
-                <svg viewBox="0 0 32 32">
-                    <g>
-                        <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
-                    </g>
-                </svg>
+    <div class="row">
+        <div th:each="producto : ${productos}" class="col-md-4 mb-3">
+            <div class="card">
+                <label class="ui-bookmark position-relative">
+                    <input type="checkbox" class="d-none">
+                    <div class="bookmark position-absolute top-0 end-0 p-2">
+                        <svg viewBox="0 0 32 32" width="24" height="24">
+                            <path d="M27 4v27a1 1 0 0 1-1.625.781L16 24.281l-9.375 7.5A1 1 0 0 1 5 31V4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4z"></path>
+                        </svg>
+                    </div>
+                </label>
+                <a th:href="@{/catalogo/}+${producto.id}" class="text-decoration-none">
+                    <img th:src="@{${producto.rutaImagen}}" class="card-img-top" alt="Imagen del producto">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${producto.nombre}"></h5>
+                    <p class="card-text" th:text="${producto.precio}"></p>
+                </div>
             </div>
-        </label>
-        <img th:src="@{${producto.rutaImagen}}" alt="Imagen del producto">
-        <div class="content">
-            <h1 th:text="@{${producto.nombre}}"></h1>
-            <p th:text="@{${producto.descripcion}}"></p>
         </div>
     </div>
 </div>

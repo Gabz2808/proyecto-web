@@ -4,6 +4,7 @@
     <title>TODO supply a title</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style th:replace="~{productoPage/fragmentos :: style}"/>
 </head>
 <body>
 <section th:replace="~{categoria/fragmentos :: iniciarSesion}"/>
@@ -14,7 +15,6 @@
 
 
 <div th:replace="~{productoPage/fragmentos :: relacionado}"/>
-<div th:replace="~{productoPage/fragmentos :: carousel}"/>
 
 <footer th:replace="~{layout/plantilla :: footer}"/>
 </body>

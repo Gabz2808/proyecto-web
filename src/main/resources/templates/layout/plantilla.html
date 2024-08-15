@@ -309,7 +309,6 @@
                 <a href="/nosotros" class="nav-link">[[#{aplicacion.nosotros}]]</a>
             </nav>
 
-
             <div>
                 <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
                     <li class="nav-item px-2">
@@ -319,22 +318,24 @@
                         <button type="button" class="btn btn-primary" onclick="window.location.href = '/register'">
                             <i></i> [[#{usuario.agregar}]]
                         </button>
-                    </li>  
+                    </li>
                 </ul>
                 <ul class="navbar-nav d-flex align-items-center" sec:authorize="isAuthenticated()">
                     <li class="nav-item px-2">
                         <form method="post" th:action="@{/logout}">
-                            <span text-black sec:authentication="name"></span>
+                            <span class="text-black" sec:authentication="name"></span>
                             <img th:src="@{${session.usuarioImagen}}"
                                  alt="Imágen del usuario"
                                  height="40"
-                                 class="rounded-circle"/>
+                                 class="w-12 h-12 rounded-full ring-2 ring-offset-4 bg-gray-500 ring-violet-600 ring-offset-gray-100"/>
+                            <a th:href="@{'/perfil/' + ${session.id} + '-' + ${session.nombre} + '-' + ${session.apellidos}}">
+                                <button type="button" class="btn btn-primary">
+                                    <i class="fas fa-user"></i>
+                                </button>
+                            </a>
                             <button class="btn btn-dark">
                                 <i class="fas fa-sign-out-alt"></i>
                             </button>
-                            <button type="button" class="btn btn-primary" onclick="window.location.href = '/perfil'">
-                                <i class="fas fa-user"></i>
-                            </button>                        
                         </form>
                     </li>
                 </ul>

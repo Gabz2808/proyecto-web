@@ -1,6 +1,7 @@
 package com.proyecto;
 
 import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +27,7 @@ public class ProjectConfig implements WebMvcConfigurer {
 
     /*Los siguientes metodos son para incorporar el tema de internacionalizacion en el proyecto */
 
- /*localeResolver se utiliza para crear una sesion de cambio de idioma*/
+    /*localeResolver se utiliza para crear una sesion de cambio de idioma*/
     @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();
@@ -65,29 +66,32 @@ public class ProjectConfig implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                        .requestMatchers("/", "/index", "/errores/**",
-                                "/carrito/**", "/pruebas/**", "/reportes/**",
-                                "/servicios/**", "/producto/listado/**", "/nosotros/**",
-                                "/registro/**", "/js/**", "/webjars/**", "/catalogo/**","/catalogo/{id}", "/register", "/login"
-                                ,"/perfil"
+                        .requestMatchers("/", "/index",
+                                "/reportes/**",
+                                "/servicios/**", "/nosotros/**","/catalogo",
+                                "/registro/**", "/js/**", "/webjars/**", "/catalogo/{id}", "/register", "/login"
+
                         ).permitAll()
                         .requestMatchers(
-                                "/producto/nuevo", "/producto/guardar",
+                                "/producto/nuevo", "/producto/guardar", "/usuario/listado",
                                 "/producto/modificar/**", "/producto/eliminar/**",
-                                "/categoria/listado/**",
+                                "/categoria/listado/**", "/perfil/**",
                                 "/categoria/nuevo", "/categoria/guardar",
-                                "/categoria/modificar/**", "/categoria/eliminar/**"
+                                "/categoria/modificar/**", "/categoria/eliminar/**","/perfil/{id}-{nombre}-{apellidos}"
                         ).hasRole("ADMIN")
                         .requestMatchers(
-                                "/usuario/listado"
+                                "/producto/listado",
+                                "/categoria/listado","/perfil/{id}-{nombre}-{apellidos}"
                         ).hasAnyRole("ADMIN", "VENDEDOR")
                         .requestMatchers(
-                                "/facturar/carrito"
+                                "/facturar/carrito", "/perfil/{id}-{nombre}-{apellidos}"
                         ).hasRole("USER")
+
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
@@ -100,7 +104,7 @@ public class ProjectConfig implements WebMvcConfigurer {
 
 
     /* El siguiente método se utiliza para completar la clase no es 
-    realmente funcional, la próxima semana se reemplaza con usuarios de BD */    
+    realmente funcional, la próxima semana se reemplaza con usuarios de BD */
 //    @Bean
 //    public UserDetailsService users() {
 //        UserDetails admin = User.builder()
@@ -120,10 +124,10 @@ public class ProjectConfig implements WebMvcConfigurer {
 //                .build();
 //        return new InMemoryUserDetailsManager(user, sales, admin);
 //    }
-    
+
     @Autowired
-   private UserDetailsService userDetailsService;
-    
+    private UserDetailsService userDetailsService;
+
     @Autowired
     public void configurerGlobal(AuthenticationManagerBuilder build)
             throws Exception {

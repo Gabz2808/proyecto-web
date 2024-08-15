@@ -6,6 +6,8 @@ import com.proyecto.domain.Usuario;
 import com.proyecto.service.UsuarioDetailsService;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,7 +40,9 @@ public class UsuarioDetailsServiceImpl implements UsuarioDetailsService, UserDet
         //Si estamos acá es porque si se recuperó un usuario...
         session.removeAttribute("usuarioImagen");
         session.setAttribute("usuarioImagen", usuario.getRutaImagen());
-        
+        session.setAttribute("id",usuario.getIdUsuario());
+        session.setAttribute("nombre",usuario.getNombre().toLowerCase());
+        session.setAttribute("apellidos",usuario.getApellidos().toLowerCase());
         //Se van a recuperar los roles del usuario y se crean los roles ya como seguridad de Spring
         var roles = new ArrayList<GrantedAuthority>();
         for (Rol rol : usuario.getRoles()) {
