@@ -132,10 +132,6 @@
                     flex: 0 0 auto;
                 }
 
-                .banner {
-                    max-height: 200px;
-                    width: 100%;
-                }
 
                 ._descripcion {
                     width: 100%;
@@ -193,9 +189,9 @@
                 }
 
                 .description {
-                    width: 100%;
+                    width: 50%;
                     height: 100%;
-                    margin-top: 10px;
+                    margin: 10px;
                 }
 
 
@@ -323,15 +319,13 @@
                 <ul class="navbar-nav d-flex align-items-center" sec:authorize="isAuthenticated()">
                     <li class="nav-item px-2">
                         <form method="post" th:action="@{/logout}">
-                            <span class="text-black" sec:authentication="name"></span>
-                            <img th:src="@{${session.usuarioImagen}}"
-                                 alt="Imágen del usuario"
-                                 height="40"
-                                 class="w-12 h-12 rounded-full ring-2 ring-offset-4 bg-gray-500 ring-violet-600 ring-offset-gray-100"/>
                             <a th:href="@{'/perfil/' + ${session.id} + '-' + ${session.nombre} + '-' + ${session.apellidos}}">
-                                <button type="button" class="btn btn-primary">
-                                    <i class="fas fa-user"></i>
-                                </button>
+
+                            <img th:src="@{${session.usuarioImagen}}"
+                                 alt="Imagen del usuario"
+                                 class="img-fluid rounded-circle border border-primary bg-secondary"
+                                 style="height: 40px; width: 40px;"/>
+
                             </a>
                             <button class="btn btn-dark">
                                 <i class="fas fa-sign-out-alt"></i>
@@ -367,15 +361,16 @@
                     </div>
             </div>
             <div th:unless="${productoRecomendado != null}">
-                <p>No hay productos recomendados en este momento.</p>
+                <p>No hay productos en orferta.</p>
             </div>
         </div>
 
 
 
         </div>
-        <img th:fragment="banner" src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/Bienvenido%20Grama.png?alt=media&token=b1b3a721-3689-4aec-b15d-27490ebf1fbb" alt="Banner" class="banner" />
-
+        <div class="banner">
+        <img th:fragment="banner" src="https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/Bienvenido%20Grama.png?alt=media&token=b1b3a721-3689-4aec-b15d-27490ebf1fbb" alt="Banner"/>
+        </div>
         <footer th:fragment="footer" style="text-align: center; padding: 1rem;">
             <div>
                 <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">

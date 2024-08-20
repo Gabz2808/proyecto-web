@@ -8,38 +8,46 @@ CREATE TABLE IF NOT EXISTS Categoria (
     descripcion TEXT,
     activo BOOLEAN NOT NULL DEFAULT TRUE
 );
+create table if not exists Descuento(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	descripcion varchar(255) not null,
+    descuento decimal(10,2) not null
+);
 
 -- Creación de la tabla Producto
 CREATE TABLE IF NOT EXISTS Producto (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_categoria INT,
+    id_descuento INT,
     nombre VARCHAR(100),
     descripcion TEXT,
     precio DECIMAL(10, 2),
     ruta_imagen VARCHAR(1024),
     stock INT,
     activo BOOLEAN NOT NULL DEFAULT TRUE,
-    FOREIGN KEY (id_categoria) REFERENCES Categoria(id)
+    FOREIGN KEY (id_categoria) REFERENCES Categoria(id),
+    FOREIGN KEY (id_descuento) REFERENCES Descuento(id)
 );
 
 -- Creación de la tabla Usuario
 CREATE TABLE usuario (
   id INT NOT NULL AUTO_INCREMENT,
-  username varchar(20) NOT NULL,
-  password varchar(512) NOT NULL,
+  username VARCHAR(20) NOT NULL,
+  password VARCHAR(512) NOT NULL,
   nombre VARCHAR(20) NOT NULL,
   apellidos VARCHAR(30) NOT NULL,
   correo VARCHAR(50) NULL,
   telefono VARCHAR(15) NULL,
-  cedula int default 0,
-  ruta_imagen varchar(1024) NULL DEFAULT 'https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/grama%2Fproducto%2Fimg0000000000000000008gente-de-la-foto.png?alt=media&token=d5cc7370-e232-49d6-9fbc-158bb39ad8bf',
-  activo boolean,
-  PRIMARY KEY (`id`));
-
+  cedula INT DEFAULT 0,
+  ruta_imagen VARCHAR(1024) NULL DEFAULT 'https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/grama%2Fproducto%2Fimg0000000000000000008gente-de-la-foto.png?alt=media&token=d5cc7370-e232-49d6-9fbc-158bb39ad8bf',
+  activo BOOLEAN,
+  PRIMARY KEY (id)
+);
 CREATE TABLE IF NOT EXISTS Favoritos(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT,
     id_producto INT,
+    fecha_adicion date,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     FOREIGN KEY (id_producto) REFERENCES Producto(id)
 );
@@ -58,7 +66,6 @@ create table muestas_productos(
 	id_producto int,
     imagen1 VARCHAR(255),
 	imagen2 VARCHAR(255),
-	imagen3 VARCHAR(255)
 );
 
 -- password 1 = 123
@@ -94,9 +101,14 @@ VALUES (1, 'Smartphone XYZ', 'Smartphone de última generación con pantalla OLE
 (1, 'Cámara de Fotos', 'Cámara digital de 20MP con capacidad de grabación 4K', 899.99, 'https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/grama%2Fproducto%2Fimg0000000000000000009camara.jpeg?alt=media&token=d7d3e47e-1c8a-411e-8439-ff1b3e488e9d', 10),
 (2, 'Impresora', 'Impresora multifunción con conectividad Wi-Fi y soporte para impresión móvil', 149.99, 'https://firebasestorage.googleapis.com/v0/b/grama-9f778.appspot.com/o/grama%2Fproducto%2Fimg0000000000000000010impresora.jpeg?alt=media&token=18421a3a-2af5-40e8-a091-9cd1b5b00a60producto', 30);
 -- Crear Trigger
-DROP TRIGGER IF EXISTS after_insert_producto;
 
-DELIMITER //
+INSERT INTO Descuento (descripcion, descuento) VALUES
+('Descuento de referidos', 12.00),
+('Descuento de fin de año', 30.00),
+('Descuento de Black Friday', 40.00),
+('Descuento por compras en volumen', 18.00),
+('Descuento de estudiante', 8.00);
+
 
 create view v_favoritos_productos as
 select F.id
@@ -107,11 +119,15 @@ select F.id
     ,P.descripcion
     ,P.precio
     ,P.ruta_imagen
-    ,P.activo
     ,F.fecha_adicion
 from favoritos F
 left join usuario U on U.id = F.id_usuario
 left join producto P on P.id = F.id_producto;
+
+
+DROP TRIGGER IF EXISTS after_insert_producto;
+
+DELIMITER //
 
 CREATE TRIGGER after_insert_producto
 AFTER INSERT ON Producto

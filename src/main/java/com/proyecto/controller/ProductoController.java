@@ -32,10 +32,8 @@ public class ProductoController {
 public String inicio(Model model) {
     var categorias = categoriaService.getCategorias(true);
     var productos = productoService.getProductos(false);
-    Producto productoRecomendado = productoService.getProductoRecomendado(); // Obtener producto recomendado
     model.addAttribute("categorias", categorias);
     model.addAttribute("productos", productos);
-    model.addAttribute("productoRecomendado", productoRecomendado); // Agregar al modelo
     model.addAttribute("totalProductos", productos.size());
     return "/producto/listado";
 }

@@ -10,7 +10,5 @@ public interface ProductoDao extends JpaRepository<Producto, Long> {
 
     List<Producto> findTop5ByCategoriaId(Long categoriaId);
 
-@Query(value="SELECT * FROM Producto ORDER BY RAND() LIMIT 1", nativeQuery = true)
-List<Producto> random();
 
 }

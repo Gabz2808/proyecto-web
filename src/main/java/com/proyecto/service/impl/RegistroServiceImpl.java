@@ -170,8 +170,7 @@ public class RegistroServiceImpl implements RegistroService {
     }
 
     private void enviaCorreoRecordar(Usuario usuario, String clave) throws MessagingException {
-        String mensaje = messageSource.getMessage(""
-                + "registro.correo.recordar", 
+        String mensaje = messageSource.getMessage("registro.correo.recordar",
                 null, 
                 Locale.getDefault());
         mensaje = String.format(

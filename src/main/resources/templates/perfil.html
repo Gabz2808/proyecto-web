@@ -8,8 +8,12 @@
     <style>
         .card {
             border-radius: 10px;
-            overflow: hidden;
             border: 1px solid #ddd;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
         }
         .card-body {
             background-color: #f8f9fa;
@@ -29,6 +33,12 @@
         }
         .form-control.d-none {
             display: none;
+        }
+        .btn-edit, .btn-save, .btn-cancel {
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
         }
         .btn-edit {
             background-color: #007bff;
@@ -59,10 +69,10 @@
             border: 4px solid #007bff;
             max-height: 200px;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-
-        .input-group .form-control:hover{
+        .input-group .form-control:hover {
             box-shadow: none;
             border-color: #007bff;
         }
@@ -84,7 +94,7 @@
                     <!-- Información personal a la izquierda -->
                     <div class="col-md-3 p-4 bg-light text-center">
                         <h5 class="card">Información Personal</h5>
-                        <img th:src="${usuario.getRutaImagen()}" class="img-fluid profile-img">
+                        <img th:src="${usuario.getRutaImagen()}" class="img-fluid profile-img" alt="Imagen de perfil">
                     </div>
                     <!-- Formulario a la derecha -->
                     <div class="col-md-9">
@@ -95,7 +105,7 @@
                                         <div class="form-group">
                                             <label for="username" class="form-label">Nombre de usuario:</label>
                                             <div class="input-group">
-                                                <input id="username" type="text" class="form-control d-none" th:value="${usuario.username}">
+                                                <input id="username" type="text" class="form-control d-none" th:value="${usuario.username}" aria-label="Nombre de usuario">
                                                 <span id="username-label" class="form-control">[[${usuario.username}]]</span>
                                             </div>
                                         </div>
@@ -104,7 +114,7 @@
                                         <div class="form-group">
                                             <label for="firstname" class="form-label">Nombre:</label>
                                             <div class="input-group">
-                                                <input id="firstname" type="text" class="form-control d-none" th:value="${usuario.nombre}">
+                                                <input id="firstname" type="text" class="form-control d-none" th:value="${usuario.nombre}" aria-label="Nombre">
                                                 <span id="firstname-label" class="form-control">[[${usuario.nombre}]]</span>
                                             </div>
                                         </div>
@@ -113,7 +123,7 @@
                                         <div class="form-group">
                                             <label for="lastname" class="form-label">Apellidos:</label>
                                             <div class="input-group">
-                                                <input id="lastname" type="text" class="form-control d-none" th:value="${usuario.apellidos}">
+                                                <input id="lastname" type="text" class="form-control d-none" th:value="${usuario.apellidos}" aria-label="Apellidos">
                                                 <span id="lastname-label" class="form-control">[[${usuario.apellidos}]]</span>
                                             </div>
                                         </div>
@@ -122,7 +132,7 @@
                                         <div class="form-group">
                                             <label for="email" class="form-label">Correo Electrónico:</label>
                                             <div class="input-group">
-                                                <input id="email" type="email" class="form-control d-none" th:value="${usuario.correo}">
+                                                <input id="email" type="email" class="form-control d-none" th:value="${usuario.correo}" aria-label="Correo Electrónico">
                                                 <span id="email-label" class="form-control">[[${usuario.correo}]]</span>
                                             </div>
                                         </div>
@@ -131,7 +141,7 @@
                                         <div class="form-group">
                                             <label for="cedula" class="form-label">Cédula:</label>
                                             <div class="input-group">
-                                                <input id="cedula" type="text" class="form-control d-none" th:value="${usuario.cedula}">
+                                                <input id="cedula" type="text" class="form-control d-none" th:value="${usuario.cedula}" aria-label="Cédula">
                                                 <span id="cedula-label" class="form-control">[[${usuario.cedula}]]</span>
                                             </div>
                                         </div>
@@ -140,17 +150,17 @@
                                         <div class="form-group">
                                             <label for="telefono" class="form-label">Teléfono:</label>
                                             <div class="input-group">
-                                                <input id="telefono" type="text" class="form-control d-none" th:value="${usuario.telefono}">
+                                                <input id="telefono" type="text" class="form-control d-none" th:value="${usuario.telefono}" aria-label="Teléfono">
                                                 <span id="telefono-label" class="form-control">[[${usuario.telefono}]]</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="mt-4 btn-group">
-                                    <button type="button" id="editBtn" class="btn btn-edit">Editar</button>
-                                    <button type="submit" id="saveBtn" class="btn btn-save d-none">Guardar</button>
-                                    <button type="button" id="cancelBtn" class="btn btn-cancel d-none">Cancelar</button>
+                                <div class="mt-4 btn-group" role="group" aria-label="Botones de acción">
+                                    <button type="button" id="editBtn" class="btn btn-edit" aria-label="Editar perfil">Editar</button>
+                                    <button type="submit" id="saveBtn" class="btn btn-save d-none" aria-label="Guardar cambios">Guardar</button>
+                                    <button type="button" id="cancelBtn" class="btn btn-cancel d-none" aria-label="Cancelar cambios">Cancelar</button>
                                 </div>
                             </form>
                         </div>
@@ -193,7 +203,8 @@
     }
 
     function resetForm() {
-        document.getElementById('userForm').reset();
+        const form = document.getElementById('userForm');
+        form.reset();
     }
 </script>
 </body>

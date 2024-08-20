@@ -22,8 +22,6 @@ public interface ProductoService {
 
     List<Producto> getRelacionados(Long id);
 
-    List<Producto> getRandom(); // Método existente
 
-    Producto getProductoRecomendado(); // Nuevo método para obtener un solo producto recomendado
 
 }

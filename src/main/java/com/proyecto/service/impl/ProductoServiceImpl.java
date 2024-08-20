@@ -54,17 +54,4 @@ public class ProductoServiceImpl implements ProductoService {
         return productoDao.findTop5ByCategoriaId(id);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Producto> getRandom() {
-        return productoDao.random(); // Devuelve una lista de productos aleatorios
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Producto getProductoRecomendado() {
-        List<Producto> productos = productoDao.random(); // Obtiene una lista de productos aleatorios
-        return productos.isEmpty() ? null : productos.get(0); // Devuelve el primer producto si la lista no está vacía
-    }
-
 }
