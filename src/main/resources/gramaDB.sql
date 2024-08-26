@@ -65,8 +65,34 @@ DEFAULT CHARACTER SET = utf8mb4;
 create table muestas_productos(
 	id_producto int,
     imagen1 VARCHAR(255),
-	imagen2 VARCHAR(255),
+	imagen2 VARCHAR(255)
 );
+
+create table factura (
+  id_factura INT NOT NULL AUTO_INCREMENT,
+  id_usuario INT NOT NULL,
+  fecha date,  
+  total double,
+  estado int,
+  PRIMARY KEY (id_factura),
+  foreign key fk_factura_usuario (id_usuario) references usuario(id)  
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+create table venta (
+  id_venta INT NOT NULL AUTO_INCREMENT,
+  id_factura INT NOT NULL,
+  id_producto INT NOT NULL,
+  precio double, 
+  cantidad int,
+  PRIMARY KEY (id_venta),
+  foreign key fk_ventas_factura (id_factura) references factura(id_factura),
+  foreign key fk_ventas_producto (id_producto) references producto(id) 
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
 
 -- password 1 = 123
 -- password 2 = 456
@@ -108,6 +134,21 @@ INSERT INTO Descuento (descripcion, descuento) VALUES
 ('Descuento de Black Friday', 40.00),
 ('Descuento por compras en volumen', 18.00),
 ('Descuento de estudiante', 8.00);
+
+/*Se crean 6 facturas */   /*'Activa','Pagada','Anulada')*/
+INSERT INTO factura (id_factura,id_usuario,fecha,total,estado) VALUES
+(1,1,'2022-01-05',4089.93,1),
+(2,2,'2022-01-17',2399.93,1),
+(3,2,'2022-01-07',4089.93,2),
+(4,1,'2022-01-15',2399.93,2);
+
+INSERT INTO venta (id_venta,id_factura,id_producto,precio,cantidad) values
+(1,1,1,699.99,3),
+(2,1,2,999.99,1),
+(3,1,3,329.99,3),
+(4,2,4,499.99,3),
+(5,2,5,299.99,1),
+(6,2,6,199.99,3);
 
 
 create view v_favoritos_productos as
